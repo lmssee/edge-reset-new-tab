@@ -1,0 +1,54 @@
+{
+  "manifest_version": 3,
+  "name": "reset new tab",
+  "short_name": "tab",
+  "version": "0.0.0.1",
+  "description": " a tolls for reset edge new tab 一个重定向 edge 新选项的插件",
+  "icons": {
+    "16": "./src/icons/ico@16x16.png",
+    "32": "./src/icons/ico@32x32.png",
+    "48": "./src/icons/ico@48x48.png",
+    "128": "./src/icons/ico@128x128.png"
+  },
+  "action": {
+    "default_popup": "src/popup/index.html",
+    "default_icon": {
+      "16": "./src/icons/ico@16x16.png",
+      "32": "./src/icons/ico@32x32.png",
+      "48": "./src/icons/ico@48x48.png",
+      "128": "./src/icons/ico@128x128.png"
+    }
+  },
+  "author": "lmssee",
+  "homepage_url": "https://lmssee.com",
+  "chrome_url_overrides": {
+    "newtab": "src/newTab/index.html",
+    "default_icon": {
+      "16": "./src/icons/ico@16x16.png",
+      "32": "./src/icons/ico@32x32.png",
+      "48": "./src/icons/ico@48x48.png",
+      "128": "./src/icons/ico@128x128.png"
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "src/js/contents.js"
+      ]
+    }
+  ],
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA1EpqPZB/Pyj8kMLD8zpOniFEWIR6rb8uPyOzJXbE/t6Z073e4iJB729Etr5QLPgKx2SydOWKkxZsm5kNWTzQ5NEkurFZEi0K/Gp+o+JNOQN8L42YzsowH0xdZW08QvLe3NkJnVoX70XG2bya95UL8SoSQSExmHYi+t6S7jrMBLkXV3sawuGOt9sjSLamYxqjILHua1AIFsCH8LnGn3+8AlftopVdiXp8xxCu6LiV/y4ldCpmg47d+dEcGq8tfFVbB4WVd37fvVSGuiaWQDVV7fJI5Av9zO2P/kwHM/JDTQAPr6L2Xu8CuM0MpVyFuyCVJU0xGGcQ3A9GcnhvHqo9+wIDAQAB",
+  "background": {
+    "service_worker": "./src/js/background.js"
+  },
+  "update_url": "https://edge.microsoft.com/extensionwebstorebase/v1/crx",
+  "permissions": [
+    "scripting",
+    "activeTab",
+    "storage",
+    "tabs"
+  ]
+}
