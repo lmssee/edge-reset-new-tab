@@ -7,6 +7,7 @@
  * @Description 悬浮按钮的相关逻辑，涉及按钮的创建、监听事件
  ****************************************************************************/
 
+import { setStyle } from 'src/common/element';
 import { data } from './data';
 import { message } from './message';
 
@@ -62,11 +63,10 @@ export const floatButton = {
       isNaN(timeDifference)
     )
       timeDifference = 1.2;
-
-    this.node.setAttribute(
-      'style',
-      `visibility: visible;--refreshAnimationDelay: ${timeDifference}s;`,
-    );
+    setStyle(this.node, {
+      visibility: 'visible',
+      '--refreshAnimationDelay': `${timeDifference}s;`,
+    });
     this.timeStamp = setTimeout(() => {
       window.location.reload();
     }, timeDifference * 1000);

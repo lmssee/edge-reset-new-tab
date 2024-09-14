@@ -1,5 +1,3 @@
-import { chrome } from 'a-edge-extends-types';
-
 /****************************************************************************
  * @Author lmssee
  * @Email lmssee@outlook.com
@@ -13,9 +11,10 @@ import { chrome } from 'a-edge-extends-types';
 
 /** 引入公共执行部分 */
 
+import { CLChanged } from 'src/common';
 import '../common/page';
 
-chrome.storage.onChanged.addListener((pref, areaName: 'local' | 'sync') => {
+CLChanged((pref, areaName: 'local' | 'sync') => {
   /// 仅关心云端数据的改变
   if (areaName !== 'sync') return;
   console.log('====================================');

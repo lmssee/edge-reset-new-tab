@@ -23,14 +23,23 @@ import { data } from './data';
 import { floatButton } from './floatButton';
 import { message } from './message';
 
-/** 注册在 chrome 内核的监听回调
- * 当 `chrome.runtime.onMessage` 触发时会触发（触发机制在弹出窗口中，即 popup.html）
- * - 回调中的 request 是发送来的消息文本
- * - sender 为发送者信息，包含发送人的 id 与其他信息
- */
+CRuntime.messageAddListener((r: unknown) => {
+  const request = r as { type: string; state: string; delay: number };
+  switch (request.type) {
+    /// 收到刷新页面相关的消息
+    case 'refresh': {
+      floatButton[(data.delay = request.delay) == 0 ? 'hide' : 'show'](), !1;
+      request.state === 'suspend' && // 上一个状态为暂停状态，设置主动暂停状态及设置状态暂停
+        (floatButton.suspend(), (data.positiveStop = !0));
+      break;
+    }
+    default: {
+      break;
+    }
+  }
+});
 
-/**  TODO ++++ */
-// chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
+// chrome.runtime.onMessage.addListener(function () {
 //   switch (request.type) {
 //     /// 收到刷新页面相关的消息
 //     case 'refresh': {
@@ -44,6 +53,12 @@ import { message } from './message';
 //     }
 //   }
 // });
+
+/** 开发打开一键重启扩展按钮 */
+import './development';
+import { CRuntime } from 'src/common';
+import { CmROMASender } from 'a-edge-extends-types/src/runtime';
+import { log } from 'node:console';
 
 /// 放一个监听者，当页面被隐藏时触发
 document.addEventListener('visibilitychange', () => {

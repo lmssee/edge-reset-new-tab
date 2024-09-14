@@ -7,13 +7,14 @@
  * @Description 定制新标签页
  ****************************************************************************/
 
-import { CSStorage, CTabs } from 'src/common';
+import { CTabs } from 'src/common/chromeTabs';
 import { commonData } from './commandData';
 import { setStyle } from 'src/common/element';
+import { CSStorage } from 'src/common/chromeSStorage';
 
 /** 发送刷新的消息 */
 export function sendMessageToPage(message: unknown): undefined {
-  CTabs.value.sendMessage(
+  CTabs.sendMessage(
     commonData.id,
     message,
     // ,(response) => undefined
@@ -69,11 +70,8 @@ export const manageNewTabSelect = {
   init() {
     // 添加点击事件
     this.addEvent();
-    /**  */
+    // 添加监听属性，当属性值发生变化时会触发
     commonData.watch('newTabValue', (property?: string, newValue?: unknown) => {
-      console.log('====================================');
-      console.log(property, newValue);
-      console.log('====================================');
       // 根据值设置当前的
       if (newValue === this.valueList[2]) customNewTabBlock.show();
       else customNewTabBlock.hide();
@@ -81,17 +79,11 @@ export const manageNewTabSelect = {
 
     // 获取云端储存的数据
     CSStorage.get(['newTab'], response => {
-      console.log('====================================');
-      console.log(response);
-      console.log('====================================');
       const newTab = ((response as { newTab: unknown }).newTab as {
         type: string;
       }) || { type: this.valueList[0] };
-      console.log(newTab);
-
       /** 拿到储存的值（没有则默认为 this.valueList） */
       const value = (newTab && newTab.type) || this.valueList[0];
-      console.log(value);
       commonData.newTabValue = value;
       /** 设置默认的选择 */
       commonData.checked(value);

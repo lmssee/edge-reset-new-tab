@@ -7,7 +7,7 @@
  * @Description 嵌入页面脚本的消息机制
  ****************************************************************************/
 
-import { chrome } from 'a-edge-extends-types';
+import { CRuntime } from 'src/common';
 
 /** # 消息区
  *  由嵌入的脚本发送消息到后台脚本（原则上不直接发消息给弹出窗口）
@@ -23,9 +23,7 @@ export const message = {
     msg: { [key: string]: unknown },
     callback?: (result: unknown) => undefined,
   ) {
-    if (typeof callback == 'function')
-      chrome.runtime.sendMessage({ ...msg, from: 'contentJS' }, callback);
-    else chrome.runtime.sendMessage({ ...msg, from: 'contentJS' });
+    CRuntime.sendMessage({ ...msg, from: 'contentJS' }, callback);
   },
   /** 发现消息问询是否刷新 */
   askRefresh() {
@@ -52,6 +50,13 @@ export const message = {
   restoreRefresh() {
     this.send({
       type: 'restoreRefresh',
+      to: 'backgroundJS',
+    });
+  },
+  /** 重新加载扩展 */
+  reloadExtend() {
+    this.send({
+      type: 'reloadExtend',
       to: 'backgroundJS',
     });
   },

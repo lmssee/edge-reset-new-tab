@@ -11,8 +11,9 @@
     "build-background": "rollup --config rollup.config.background.js",
     "clear": "npx ixxx rm dist",
     "clean": "npx ixxx pkg -u rm node_modules && npm install && npm run build",
-    "prettier": "npx prettier . --write",
+    "r": "npm uninstall a-edge-extends-types && npm install --save-dev ../../npm/edge-extends-types/dist/",
     "beautify": "npm run prettier",
+    "prettier": "npx prettier . --write",
     "eslint": "npx eslint src"
   },
   "repository": {

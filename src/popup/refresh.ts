@@ -10,7 +10,8 @@
 import { debounce } from 'a-js-tools';
 import { commonData } from './commandData';
 import { sendMessageToPage } from './newTabSelect';
-import { CLStorage } from 'src/common';
+import { CTabs } from 'src/common/chromeTabs';
+import { CLStorage } from 'src/common/chromeLStorage';
 
 /** 元素 `div#refreshBlock` 相关
  *
@@ -81,7 +82,7 @@ export const refreshButton = {
       style.color = '#066';
     }
     /// 倘若要改变其状态
-    changState && CLStorage.manage(delay);
+    changState && manageLocaleData(delay);
   },
   /** 非功能页面初始化数据
    *
@@ -90,7 +91,7 @@ export const refreshButton = {
   init(id: number) {
     /// 注册监听事件监听（*由于页面不会存活太久，且没有需要主动移除监听的必要*）
     /** 查找当前获取焦点的页面，即我们的目标页面 */
-    (commonData.id = id), this.addEvent(), timedRefreshSelect.addEvent();
+    this.addEvent(), timedRefreshSelect.addEvent();
     CLStorage.get(['refreshPageList'], (_r: { [x: string]: unknown }) => {
       const result = _r as {
         refreshPageList: { [x: number]: { delay: number } };
@@ -138,7 +139,44 @@ const timedRefreshSelect = {
       // 只找到我们感兴趣的事件
       target.nodeName.toLocaleLowerCase() === 'input' &&
         target.name === 'timedRefreshTime' &&
-        CLStorage.manage((commonData.refreshSelected = Number(target.value)));
+        manageLocaleData((commonData.refreshSelected = Number(target.value)));
     });
   },
 };
+
+/**
+ * 整理现有的已经开始刷新 tab
+ * @param {number} delay  当前的状态，0 表示暂停定时刷新
+ */
+function manageLocaleData(delay: number = 0) {
+  const { id } = commonData;
+  CLStorage.get(['refreshPageList'], (result: { [x: string]: unknown }) => {
+    /** 获取或新建  `refreshPageList` */
+    const refreshPageList: { [x: number]: unknown } = (result.refreshPageList ||
+      {}) as { [x: number]: unknown };
+    if (delay == 0) delete refreshPageList[id];
+    else
+      refreshPageList[id] = {
+        id,
+        time: Date.now(),
+        state: 'refresh',
+        delay,
+      };
+    /// 获取现有的网页
+    CTabs.get({}, tabs => {
+      const template: { [x: string]: unknown } = {};
+      /// 遍历已有的，并筛除不存在的
+      for (const key in refreshPageList) {
+        if (Object.prototype.hasOwnProperty.call(refreshPageList, key)) {
+          for (const element of tabs) {
+            if (element.id === Number(key)) {
+              template[key] = refreshPageList[key];
+              break;
+            }
+          }
+        }
+      }
+      CLStorage.set({ refreshPageList: template });
+    });
+  });
+}

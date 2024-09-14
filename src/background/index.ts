@@ -8,9 +8,7 @@
  ****************************************************************************/
 
 import { chrome } from 'a-edge-extends-types';
-
-/** 设置 `chrome.storage.local` 别名  */
-const chromeLocalStorage = chrome.storage.local;
+import { CLStorage, CRuntime, CTabs } from 'src/common';
 
 /** 消息处理机制
  * - id       页面的 id
@@ -24,14 +22,8 @@ const message = {
    * @param  {any}  msg           要发送的消息
    * @param  {function|undefined} callback      回调方法
    */
-  send(
-    id: number,
-    msg: unknown,
-    callback?: (response: { [key: string]: unknown }) => undefined,
-  ) {
-    if (typeof callback === 'function')
-      chrome.tabs.sendMessage(id, msg, callback);
-    else chrome.tabs.sendMessage(id, msg);
+  send(id: number, msg: unknown, callback?: (response: unknown) => undefined) {
+    CTabs.sendMessage(id, msg, callback);
   },
   /** 刷新页面 */
   refresh(data: { id: number; [key: string]: unknown }) {
@@ -50,16 +42,20 @@ const message = {
  *
  * 在页面被隐藏时，即  `tab` 的 `active` 为 `false` 时，发送
  *  */
-chrome.runtime.onMessage.addListener((_r: unknown, sender) => {
+CRuntime.messageAddListener((_r: unknown, sender) => {
   const response = _r as { [x: string]: number | string };
   /// 非礼勿视
   if (response['to'] !== 'backgroundJS') return;
   /** 发送者的页面 id */
-  const id = sender.id;
+  const id = sender.tab.id;
   const { type } = response;
+  if (type === 'reloadExtend') {
+    chrome.runtime.reload();
+    return;
+  }
   /// 正在活动的页面发送来问询刷新页面的请求
   if (
-    (type === 'askRefresh' && sender.active) ||
+    (type === 'askRefresh' && sender.tab.active) ||
     type === 'cancelRefresh' ||
     type === 'suspendRefresh' ||
     type === 'restoreRefresh'
@@ -79,13 +75,13 @@ chrome.runtime.onMessage.addListener((_r: unknown, sender) => {
           }
           case 'cancelRefresh': {
             delete result.refreshPageList[id];
-            chromeLocalStorage.set({
+            CLStorage.set({
               refreshPageList: result.refreshPageList,
             });
             break;
           }
           default: {
-            chromeLocalStorage.set({
+            CLStorage.set({
               refreshPageList:
                 ((result.refreshPageList[id].state =
                   (type === 'suspendRefresh' && 'suspend') || 'refresh'),
@@ -104,7 +100,7 @@ chrome.runtime.onMessage.addListener((_r: unknown, sender) => {
 function getLocalRefreshList(
   callBack: (result: { [key: string]: unknown }) => undefined,
 ) {
-  chromeLocalStorage.get(['refreshPageList'], callBack);
+  CLStorage.get(['refreshPageList'], callBack);
 }
 getState;
 /**
@@ -116,7 +112,7 @@ function getState() {
 
   getLocalRefreshList((result: { [x: string]: unknown }) => {
     const refreshPageList = result['refreshPageList'] || {};
-    chrome.tabs.query({}, response => {
+    CTabs.get({}, response => {
       console.log(
         `\n\n当前共打开${response.length}个窗口，正在刷新的有${
           Object.keys(refreshPageList).length
