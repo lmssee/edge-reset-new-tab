@@ -56,6 +56,68 @@
    cursor: pointer;
  }
 
+ input[type='radio'] {
+   width: 0;
+   height: 0;
+   overflow: hidden;
+
+   +label {
+     padding-left: 15px;
+
+     &::before,
+     &::after {
+       content: "";
+       position: absolute;
+       border-radius: 50%;
+       top: 50%;
+       transform: translate(0, -50%);
+       overflow: hidden;
+     }
+
+     &::before {
+       left: 0px;
+       height: 8px;
+       width: 8px;
+
+       box-shadow: 1px 1px 3px #000;
+       z-index: 1;
+     }
+
+     &::after {
+       font-size: 8px;
+       line-height: 8px;
+       z-index: 2;
+       left: 0px;
+       height: 8px;
+       width: 8px;
+       color: #fff;
+       background-color: #000;
+       clip-path: circle(0%);
+       transition: all 0.3s;
+     }
+   }
+
+
+   &:checked {
+     color: #f00;
+
+     &+label {
+       color: #0a3;
+
+       &::before {
+         box-shadow: 1px 1px 3px #0f3, -1px -1px 3px #0f3;
+       }
+
+       &::after {
+         background-color: #0a3;
+         clip-path: circle(100%);
+         transition: all 0.8s;
+       }
+     }
+   }
+ }
+
+
  .center {
    position: absolute;
    left: 50%;

@@ -20,7 +20,7 @@ body {
 
 
 
-div.blankPage {
+div.blankPage div {
   margin: 10px;
   padding: 2px 20px;
   color: transparent;
@@ -29,10 +29,16 @@ div.blankPage {
   background-image: linear-gradient(45deg, #f00, #000, #0f0, #ff0);
   background-clip: text;
   border-radius: 10px;
-  /* box-shadow: 0 5px 16px 0 #6661; */
 
   &:not(.center) {
-    box-shadow: var(--box-shadow);
+    transition: all .8s;
+    box-shadow: 0 5px 8px 0 #6661;
+
+    &:hover {
+      transition: all .8s;
+      box-shadow: var(--box-shadow);
+      transform: translate(0, -2px);
+    }
   }
 
 

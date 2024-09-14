@@ -11,7 +11,7 @@
   
   -->
 <!DOCTYPE html>
-<html lang="zh-cn">
+<html lang="zh-CN">
 
 <head>
   <meta charset="utf-8" />
@@ -33,8 +33,7 @@
     </h1>
     <div id="manageNewTabSelect">
       <div>
-        <input type="radio" name="manageNewTab" value="blankPage" id="blankPage" checked><label
-          for="blankPage">空白页</label>
+        <input type="radio" name="manageNewTab" value="blankPage" id="blankPage"><label for="blankPage">空白页</label>
       </div>
       <div>
         <input type="radio" name="manageNewTab" value="recommend" id="recommend"><label for="recommend">推荐页</label>
@@ -45,6 +44,7 @@
     </div>
     <div id="customNewTabBlock">
       <input type="text" id="customNewTabInput">
+      <!-- <input type="button" value="确认"> -->
     </div>
   </div>
   <div id="refreshBlock">
@@ -56,13 +56,13 @@
     </div>
     <div id="timedRefreshSelect">
       <div>
-        <input type="radio" name="timedRefreshTime" value="1.2" id="radioA"> <label for="radioA">1.2s</label>
+        <input type="radio" name="timedRefreshTime" value="1.2" id="radioA" hidden> <label for="radioA">1.2s</label>
       </div>
       <div>
-        <input type="radio" name="timedRefreshTime" value="2.4" id="radioB"> <label for="radioB">2.4s</label>
+        <input type="radio" name="timedRefreshTime" value="2.4" id="radioB" hidden> <label for="radioB">2.4s</label>
       </div>
       <div>
-        <input type="radio" name="timedRefreshTime" value="3.6" id="radioC"> <label for="radioC">3.6s</label>
+        <input type="radio" name="timedRefreshTime" value="3.6" id="radioC" hidden> <label for="radioC">3.6s</label>
       </div>
       <!-- <div>
         <input type="radio" name="timedRefreshTime" value="0" id="radioD"><label for="radioD">自定义</label>
@@ -73,13 +73,22 @@
     </div> -->
   </div>
   <div class="footer">
-    <a href="https://github.com/lmssee/resetNewTab" target="_blank" rel="noopener noreferrer">幸运小手</a>
-    <a href="https://github.com/lmssee/resetNewTab/issues" target="_blank">意见反馈</a>
+    <ul>
+      <li title="求 👍"><a href="https://github.com/lmssee/resetNewTab" target="_blank" rel="noopener noreferrer"><img
+            src="../images/GitHub.png" alt="github"> </a></li>
+      <li title="邮件反馈"><a href="mailto:lmssee@outlook.com" target="_blank" rel="noopener noreferrer"><img
+            src="../images/email.png" alt="email"> </a></li>
+      <li title="letmiseesee"><a href="https://x.com/letmiseesee" target="_blank" rel="noopener noreferrer"><img
+            src="../images/x.png" alt="x"> </a>
+      </li>
+      <li title="建议反馈"><a href="https://github.com/lmssee/resetNewTab/issues" target="_blank"
+          rel="noopener noreferrer"><img src="../images/feedback.png" alt="feedback"> </a>
+      </li>
+    </ul>
   </div>
 
-  <script src="./index.js">  </script>
 
 </body>
-<script src="../js/common.js"></script>
+<script src="./index.js">  </script>
 
 </html>

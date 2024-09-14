@@ -12,11 +12,11 @@
    width: 290px;
    margin: var(--top) auto;
    padding: 10px 20px 3rem;
-   box-shadow: 1px 1px 8px #fff6;
-   animation: 1s linear 0s infinite alternate bodyBoxShadow;
+   box-shadow: 1px 1px 8px #fff;
    background-image: linear-gradient(to top, #fffe, #fffe), linear-gradient(45deg, transparent 40%, #000a 45%, #000a 55%, transparent 60%), linear-gradient(-45deg, transparent 40%, #000a 45%, #000a 55%, transparent 60%);
    background-size: 48px 48px;
    background-position: 0px 0px;
+   animation: 1s linear 0s infinite alternate bodyBoxShadow;
  }
 
 
@@ -28,7 +28,7 @@
    width: 100%;
    height: 100%;
    background-size: 96px 96px;
-   background-color: #999;
+   background-color: #fff;
    background-image:
      radial-gradient(circle at center, #fff 0%, #0f0 6.8px, transparent 6.8px),
      radial-gradient(circle at center, #fff 0%, #00f 6.8px, transparent 6.8px),
@@ -45,13 +45,27 @@
 
  body,
  body::before {
-   border-radius: 28px 28px 6px 6px;
    background-clip: padding-box;
  }
 
 
  div#customNewTabBlock {
-   display: none;
+   height: 80px;
+   overflow: hidden;
+
+   /** 输入框 */
+   input[type="text"] {
+     width: 200px;
+     border-radius: 10px;
+
+   }
+
+
+   & input[type="button"] {
+     width: 48px;
+     margin: 0px;
+     padding: 0px;
+   }
  }
 
 
@@ -66,7 +80,6 @@
 
  #timedRefreshButton:hover {
 
-   /* box-shadow: 1px 1px 8px #000a, -1px -1px 8px #fffa; */
    box-shadow: var(--box-shadow);
    transition: box-shadow 0.8s;
  }
@@ -83,10 +96,6 @@
    justify-items: stretch;
    align-content: center;
    align-items: baseline;
-
-   & div label {
-     padding-left: 4px;
-   }
 
    /* 输入框和按钮（被注释部分） */
    &+div {
@@ -119,72 +128,65 @@
 
  /** 页脚设置 */
  .footer {
-   position: fixed;
+   position: absolute;
    left: 5px;
-   bottom: 5px;
+   bottom: 8px;
    z-index: 2;
    width: 290px;
    height: 20px;
-   display: flex;
-   flex-direction: row;
-   justify-content: space-around;
-   background-color: #0003;
-   box-shadow: 0px -1px 8px #0009;
    border-radius: 6px;
    overflow: hidden;
-   --first-color: #ff0;
-   --last-color: #0f0;
+   --popup-foot-li-height: 12px;
 
-   &:hover {
-     & a:last-child {
-       color: var(--first-color);
-     }
-
-     & a {
-       color: var(--last-color);
-     }
-   }
-
-   & a {
-     display: inline-block;
-     width: 50%;
+   & ul {
+     all: unset;
+     display: flex;
+     flex-direction: row;
+     justify-content: space-around;
+     align-items: center;
+     float: right;
+     /* width: 200px; */
      height: 20px;
-     line-height: 20px;
-     color: var(--first-color);
-     text-align: center;
-     border-radius: 12px;
-     font-size: 12px;
-     text-shadow: 1px 1px .5px #000, -1px -1px 3px #00f6;
-     transition: all 1s;
 
-     &:hover {
-       --color129: #ff09;
-       color: #000;
-       font-weight: 800;
-       text-shadow: 1px 1px 0.5px var(--color129), -1px -1px 0.5px var(--color129);
-     }
+     & li {
+       all: unset;
+       width: 30px;
 
-     &:last-child:hover {
-       --color: #0f09;
-       color: #000;
-       text-shadow: 1px 1px 0.5px var(--color), -1px -1px 0.5px var(--color);
-     }
+       & a {
+         all: unset;
+         height: 20px;
+         vertical-align: middle;
+         text-align: center;
 
-     &:last-child {
-       color: var(--last-color);
+         & img {
+           all: unset;
+           overflow: hidden;
+           vertical-align: middle;
+           height: var(--popup-foot-li-height);
+           transform: translate(0, -1px);
+           border-radius: 50%;
+           cursor: pointer;
+
+           &:hover {
+             transform: scale(1.6) translate(0, -15%);
+           }
+         }
+       }
      }
    }
-
 
  }
 
+
  @keyframes bodyBoxShadow {
-   from {
+   0% {
+     border-radius: 12px 6px;
      /* opacity: 0.1; */
      box-shadow: 1px 1px 8px #0003, -1px -1px 12px #0000;
    }
 
-   to {
+   100% {
+     border-radius: 6px 12px;
      /* opacity: 0.1; */
      box-shadow: 1px 1px 4px #0006, -1px -1px 12px #0003;
    }
