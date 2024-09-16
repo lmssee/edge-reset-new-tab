@@ -12,7 +12,8 @@
 /** 引入公共执行部分 */
 
 import { CLChanged } from 'src/common';
-import '../common/page';
+import '../common/page'; /// 引入公共代码部分
+import '../content/development'; /// 引入开发需要
 
 CLChanged((pref, areaName: 'local' | 'sync') => {
   /// 仅关心云端数据的改变
@@ -22,7 +23,7 @@ CLChanged((pref, areaName: 'local' | 'sync') => {
   console.log('====================================');
 });
 
-blankPage();
+blankPage(); /// 加载一个空白页
 
 document.body.addEventListener('contextmenu', e => {
   console.log('====================================');
@@ -53,11 +54,12 @@ function blankPage() {
   const root = document.createDocumentFragment();
   const lmssee = document.createElement('div');
   lmssee.setAttribute('id', 'lmssee');
-  // lmssee.id = "lmssee";
   lmssee.className = 'center';
   lmssee.innerHTML = `<div class="blankPage"> <div>${year}<span> 年 </span> ${month} <span> 月 </span> ${today} <span> 号 </span>  </div> 
     <div>周 ${['天', '一', '二', '三', '四', '五', '六'][now.getDay()]} </div>
+    <!-- 
     <div><span>天气：</span>未知</div></div>
+    -->
     `;
   root.appendChild(lmssee);
   /// 移除旧的文档文件，主要发生在该页面打开时，恰好在弹出窗口配置新打开的标签页

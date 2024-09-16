@@ -22,6 +22,9 @@
 import { data } from './data';
 import { floatButton } from './floatButton';
 import { message } from './message';
+/** 开发打开一键重启扩展按钮 */
+import './development';
+import { CRuntime } from 'src/common';
 
 CRuntime.messageAddListener((r: unknown) => {
   const request = r as { type: string; state: string; delay: number };
@@ -53,12 +56,6 @@ CRuntime.messageAddListener((r: unknown) => {
 //     }
 //   }
 // });
-
-/** 开发打开一键重启扩展按钮 */
-import './development';
-import { CRuntime } from 'src/common';
-import { CmROMASender } from 'a-edge-extends-types/src/runtime';
-import { log } from 'node:console';
 
 /// 放一个监听者，当页面被隐藏时触发
 document.addEventListener('visibilitychange', () => {

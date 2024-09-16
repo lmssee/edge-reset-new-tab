@@ -7,7 +7,7 @@
  * @Description `chrome.tabs` 相关的逻辑
  ****************************************************************************/
 import { chrome } from 'a-edge-extends-types';
-import { Tab } from 'a-edge-extends-types/src/tabs';
+import { Tab } from 'a-edge-extends-types/tab';
 
 const chromeTabs = chrome.tabs;
 /** # 当前的页面的信息及向页面发送消息

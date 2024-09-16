@@ -1,0 +1,14 @@
+{
+  "name": {
+    "description": "默认的名称",
+    "message": "reset new tab"
+  },
+  "description": {
+    "description": "版本的描述",
+    "message": "It is a simple plugin for customizing newly created blank tabs. Of course, you can customize the URL of the page or use the provided custom page to define your new tab page"
+  },
+  "short_name": {
+    "description": "昵称",
+    "message": "r_n_t"
+  }
+}

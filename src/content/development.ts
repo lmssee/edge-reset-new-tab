@@ -13,8 +13,10 @@ import { message } from './message';
 
 /** 执行一个页面重新加载组建 */
 (() => {
+  const pageReload = () => setTimeout(() => window.location.reload(), 250);
   const element = document.createElement('reload-extend');
   setStyle(element, {
+    all: 'unset',
     position: 'fixed',
     bottom: '84px',
     right: '48px',
@@ -30,11 +32,20 @@ import { message } from './message';
     textAlign: 'center',
     zIndex: '10000',
     boxShadow: '1px 1px 6px #f0f9,-1px -1px 6px #0f0e',
+    boxSizing: 'border-box',
   });
   element.innerHTML = '⟲';
-  element.title = '开发重加载扩展';
+  element.title = '重加载扩展 reset new tab';
   element.addEventListener('click', () => {
-    /// 一个友好的遮盖层
+    createACover();
+    pageReload();
+    message.reloadExtend();
+  });
+  element.addEventListener('contextmenu', () => pageReload());
+  document.body.appendChild(element);
+
+  /// 一个友好的遮盖层
+  function createACover() {
     const cover = document.createElement('reload-cover-page');
     setStyle(cover, {
       position: 'fixed',
@@ -43,19 +54,15 @@ import { message } from './message';
       textAlign: 'center',
       lineHeight: '100vh',
       fontSize: '24px',
-      width: '100vh',
+      width: '100vw',
       height: '100vh',
-      background: '#6666',
-      color: '#000',
-      textShadow: '1px  1px 3px #0ff',
+      background: '#363a',
+      color: '#fff',
+      borderRadius: '48px',
+      textShadow: 'rgba(0,255,55,0.69) 1px  1px 6px',
       zIndex: '10001',
     });
     cover.innerHTML = '请稍等，正在加载';
     document.body.appendChild(cover);
-    message.reloadExtend();
-    setTimeout(() => {
-      window.location.reload();
-    }, 1200);
-  });
-  document.body.appendChild(element);
+  }
 })();

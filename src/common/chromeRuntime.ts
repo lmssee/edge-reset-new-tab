@@ -8,7 +8,7 @@
  ****************************************************************************/
 
 import { chrome } from 'a-edge-extends-types';
-import { CmROMASender } from 'a-edge-extends-types/src/runtime';
+import { CmROMASender } from 'a-edge-extends-types/runtime';
 
 const chromeRuntime = chrome.runtime;
 

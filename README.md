@@ -1,3 +1,3 @@
 # reset new tab
 
-This package is an [extension](https://learn.microsoft.com/zh-cn/microsoft-edge/extensions-chromium/getting-started/part1-simple-extension?tabs=v3) of Edge Browser, and launching it will display a blank page on a new tab page
+This package is an [extension](https://microsoftedge.microsoft.com/addons/detail/bfecjipachpbkclaobjigeacheimkfbh) of Edge Browser, and launching it will display a blank page on a new tab page

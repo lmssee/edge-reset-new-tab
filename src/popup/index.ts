@@ -8,8 +8,8 @@
  * 这里可能会主要针对于页面消息发送
  ****************************************************************************/
 /** 原来引入是有顺序的 */
+import { Tab } from 'a-edge-extends-types/tab';
 import '../common/page';
-import { Tab } from 'a-edge-extends-types/src/tabs';
 
 /** 引入公共执行部分 */
 import { commonData } from './commandData';
@@ -33,8 +33,8 @@ CTabs.getCurrentPage((tabs: Tab[]) => {
   const page = tabs[0];
   /// 初始化标签页
   manageNewTabSelect.init();
-  commonData.url = page.url; /// 储存当前页面的 url
-  commonData.id = page.id; /// 储存当前页面的 id
+  commonData.url = page.url!; /// 储存当前页面的 url
+  commonData.id = page.id!; /// 储存当前页面的 id
 
   //// 这里注意大小写的问题
   if (page.url === 'edge://newtab/') {
@@ -42,13 +42,13 @@ CTabs.getCurrentPage((tabs: Tab[]) => {
     /// 新建页面
     return;
   } else if (
-    page.url.startsWith('edge://') ||
-    page.url.startsWith('edge://') ||
-    /.*microsoft\.com.*/.test(page.url)
+    !page.url!.startsWith('http') ||
+    !page.url!.startsWith('file://') ||
+    /.*microsoft\.com.*/.test(page.url!)
   ) {
     /// 非新加标签页和 microsoft 自己的网页是不给注入脚本的
     refreshBlock.hide(); ///  隐藏刷新块
     return;
   }
-  refreshButton.init(page.id); /// 非功能页默认为普通的页面（可执行刷新的页面），开始查询是否正在刷新
+  refreshButton.init(page.id!); /// 非功能页默认为普通的页面（可执行刷新的页面），开始查询是否正在刷新
 });

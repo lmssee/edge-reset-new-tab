@@ -1,0 +1,14 @@
+{
+  "name": {
+    "description": "默认的名称",
+    "message": "重置新标签页（随心版）"
+  },
+  "description": {
+    "description": "版本的描述",
+    "message": "是一款简单的插件，用于自定义新创空白标签页。当然，您可以自定义页面的 url ，或者使用给出的自定义页面定义你的新标签页"
+  },
+  "short_name": {
+    "description": "昵称",
+    "message": "重置"
+  }
+}

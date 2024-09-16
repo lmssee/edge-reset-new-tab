@@ -10,6 +10,9 @@
 import { chrome } from 'a-edge-extends-types';
 import { CLStorage, CRuntime, CTabs } from 'src/common';
 
+/** 将右键的执行代码放进来 */
+import './contextMenu';
+
 /** 消息处理机制
  * - id       页面的 id
  * - send     发送消息的方法
@@ -47,7 +50,7 @@ CRuntime.messageAddListener((_r: unknown, sender) => {
   /// 非礼勿视
   if (response['to'] !== 'backgroundJS') return;
   /** 发送者的页面 id */
-  const id = sender.tab.id;
+  const id = sender.tab.id!;
   const { type } = response;
   if (type === 'reloadExtend') {
     chrome.runtime.reload();
