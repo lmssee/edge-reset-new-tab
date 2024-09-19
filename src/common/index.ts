@@ -7,13 +7,12 @@
  * @Description 公共的逻辑
  ****************************************************************************/
 
-import { chrome } from 'a-edge-extends-types';
-
 export { CLStorage } from './chromeLStorage';
 export { CTabs } from './chromeTabs';
 export { CSStorage } from './chromeSStorage';
 export { CRuntime } from './chromeRuntime';
 /** 监听 storage 数据变化 */
+
 export function CLChanged(
   callback: (
     pref: {

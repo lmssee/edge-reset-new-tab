@@ -8,7 +8,8 @@
  * 这里可能会主要针对于页面消息发送
  ****************************************************************************/
 /** 原来引入是有顺序的 */
-import { Tab } from 'a-edge-extends-types/tab';
+
+import { CmTabsTab } from 'a-edge-extends-types/tab';
 import '../common/page';
 
 /** 引入公共执行部分 */
@@ -28,7 +29,7 @@ import { CTabs } from 'src/common/chromeTabs';
  *  把这个数据放在 chrome.storage.local
  * _chrome.storage 可以在弹出窗口用，也可以在嵌入脚本用，但是不能用于页面脚本_
  */
-CTabs.getCurrentPage((tabs: Tab[]) => {
+CTabs.getCurrentPage((tabs: CmTabsTab[]) => {
   /** 当前页面的信息 */
   const page = tabs[0];
   /// 初始化标签页

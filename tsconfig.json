@@ -5,22 +5,21 @@
     "strict": true,
     "target": "ESNext",
     "module": "ESNext",
-    "skipLibCheck": true,
+    "skipLibCheck": false,
     "esModuleInterop": true,
     "moduleResolution": "Bundler",
     "allowSyntheticDefaultImports": true,
     "lib": [
       "ESNext",
-      "DOM"
+      "DOM",
     ],
-    "sourceMap": false
+    "sourceMap": false,
   },
   "include": [
     "src/**/*.ts",
+    "**.d.ts",
   ],
   "exclude": [
-    "node_modules",
-    "dist",
-    "src/popup/index.js"
-  ]
+    "dist"
+  ],
 }

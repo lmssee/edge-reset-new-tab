@@ -6,8 +6,8 @@
  * @CreateDate  周六  09/14/2024
  * @Description `chrome.tabs` 相关的逻辑
  ****************************************************************************/
-import { chrome } from 'a-edge-extends-types';
-import { Tab } from 'a-edge-extends-types/tab';
+
+import { CmTabsTab } from 'a-edge-extends-types/tab';
 
 const chromeTabs = chrome.tabs;
 /** # 当前的页面的信息及向页面发送消息
@@ -23,14 +23,14 @@ export const CTabs = {
       active?: boolean | undefined;
       currentWindow?: boolean | undefined;
     },
-    callback: (tabs: Tab[]) => undefined,
+    callback: (tabs: CmTabsTab[]) => undefined,
   ) {
     chromeTabs.query(data, callback);
   },
   /** 取当前页面
    * @param {@link Function} callBack  回调函数，其第一个形参为 `tabs` 数组
    */
-  getCurrentPage(callBack: (tabs: Tab[]) => undefined) {
+  getCurrentPage(callBack: (tabs: CmTabsTab[]) => undefined) {
     this.get({ active: true, currentWindow: true }, callBack);
   },
   /** 发送消息  */

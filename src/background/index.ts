@@ -7,8 +7,8 @@
  * @Description 设定背景逻辑
  ****************************************************************************/
 
-import { chrome } from 'a-edge-extends-types';
 import { CLStorage, CRuntime, CTabs } from 'src/common';
+import { CmStorageLocalValueT } from 'src/common/chromeLStorage';
 
 /** 将右键的执行代码放进来 */
 import './contextMenu';
@@ -63,12 +63,7 @@ CRuntime.messageAddListener((_r: unknown, sender) => {
     type === 'suspendRefresh' ||
     type === 'restoreRefresh'
   )
-    getLocalRefreshList((_r: { [x: string]: unknown }) => {
-      const result = _r as {
-        refreshPageList: {
-          [x: number]: { [key: string]: unknown; id: number };
-        };
-      };
+    getLocalRefreshList(result => {
       // 收到页面的问询消息后从
       if (result.refreshPageList && result.refreshPageList[id]) {
         switch (type) {
@@ -99,9 +94,20 @@ CRuntime.messageAddListener((_r: unknown, sender) => {
 
 /**
  *  获取本地储存的定时刷新页面的值
+ *
+ * ```ts
+ *  type CmStorageLocalValueT = {
+ *      refreshPageList?: {
+ *          [x: number]: {
+ *              state?: "refresh" | "suspend";
+ *              id: number;
+ *          };
+ *      };
+ *  }
+ * ```
  */
 function getLocalRefreshList(
-  callBack: (result: { [key: string]: unknown }) => undefined,
+  callBack: (result: CmStorageLocalValueT) => undefined,
 ) {
   CLStorage.get(['refreshPageList'], callBack);
 }
@@ -113,7 +119,7 @@ function getState() {
   /**  在弹出窗口不打印该信息  */
   if (!location.pathname.endsWith('background.js')) return;
 
-  getLocalRefreshList((result: { [x: string]: unknown }) => {
+  getLocalRefreshList(result => {
     const refreshPageList = result['refreshPageList'] || {};
     CTabs.get({}, response => {
       console.log(

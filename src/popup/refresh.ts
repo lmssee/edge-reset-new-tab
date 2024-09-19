@@ -11,7 +11,8 @@ import { debounce } from 'a-js-tools';
 import { commonData } from './commandData';
 import { sendMessageToPage } from './newTabSelect';
 import { CTabs } from 'src/common/chromeTabs';
-import { CLStorage } from 'src/common/chromeLStorage';
+import { CLStorage, refreshDelayT } from 'src/common/chromeLStorage';
+import { setStyle } from 'src/common/element';
 
 /** 元素 `div#refreshBlock` 相关
  *
@@ -46,10 +47,11 @@ export const refreshButton = {
       'click',
       debounce(() => {
         /**  获取当前状态 */
-        const delay =
+        const delay = (
           this.node!.value === '待开启'
             ? Math.max(commonData.refreshSelected, 1.2)
-            : 0;
+            : 0
+        ) as refreshDelayT;
         /// 向特定页面发送消息
         sendMessageToPage({
           type: 'refresh',
@@ -65,10 +67,10 @@ export const refreshButton = {
   },
 
   /** 设定按钮的文本
-   * @param { number} delay  当前的状态或即将设置的时间延迟
+   * @param { refreshDelayT} delay  当前的状态或即将设置的时间延迟
    * @param { boolean} [changState=false] 是否为改变状态
    */
-  setText(delay: number, changState: boolean = false) {
+  setText(delay: refreshDelayT, changState: boolean = false) {
     const style = this.node.style;
     if (delay == 0) {
       timedRefreshSelect.hide();
@@ -92,10 +94,7 @@ export const refreshButton = {
     /// 注册监听事件监听（*由于页面不会存活太久，且没有需要主动移除监听的必要*）
     /** 查找当前获取焦点的页面，即我们的目标页面 */
     this.addEvent(), timedRefreshSelect.addEvent();
-    CLStorage.get(['refreshPageList'], (_r: { [x: string]: unknown }) => {
-      const result = _r as {
-        refreshPageList: { [x: number]: { delay: number } };
-      };
+    CLStorage.get(['refreshPageList'], result => {
       const a =
         result.refreshPageList && result.refreshPageList[id]
           ? result.refreshPageList[id].delay || 1.2
@@ -118,14 +117,18 @@ const timedRefreshSelect = {
   show(delay: number) {
     /** 显示选择组的时候给定默认选择项 */
     commonData.checked((commonData.refreshSelected = Number(delay)).toString());
-    this.node.style.height = '20px';
-    this.node.style.opacity = '1';
-    this.node.style.transition = 'height 0.15s 0s, opacity 0.15s 0.15s';
+    setStyle(this.node, {
+      height: '20px',
+      opacity: '1',
+      transition: 'height 0.15s 0s, opacity 0.15s 0.15s',
+    });
   },
   hide() {
-    this.node!.style.transition = 'height 0.15s 0.15s, opacity 0.15s 0s';
-    this.node.style.opacity = '0';
-    this.node.style.height = '0px';
+    setStyle(this.node, {
+      height: '0px',
+      opacity: '0',
+      transition: 'height 0.15s 0.15s, opacity 0.15s 0s',
+    });
   },
   /** 添加事件 */
   addEvent() {
@@ -139,7 +142,9 @@ const timedRefreshSelect = {
       // 只找到我们感兴趣的事件
       target.nodeName.toLocaleLowerCase() === 'input' &&
         target.name === 'timedRefreshTime' &&
-        manageLocaleData((commonData.refreshSelected = Number(target.value)));
+        manageLocaleData(
+          (commonData.refreshSelected = Number(target.value)) as refreshDelayT,
+        );
     });
   },
 };
@@ -148,12 +153,11 @@ const timedRefreshSelect = {
  * 整理现有的已经开始刷新 tab
  * @param {number} delay  当前的状态，0 表示暂停定时刷新
  */
-function manageLocaleData(delay: number = 0) {
+function manageLocaleData(delay: refreshDelayT = 0) {
   const { id } = commonData;
-  CLStorage.get(['refreshPageList'], (result: { [x: string]: unknown }) => {
+  CLStorage.get(['refreshPageList'], result => {
     /** 获取或新建  `refreshPageList` */
-    const refreshPageList: { [x: number]: unknown } = (result.refreshPageList ||
-      {}) as { [x: number]: unknown };
+    const refreshPageList = result.refreshPageList || {};
     if (delay == 0) delete refreshPageList[id];
     else
       refreshPageList[id] = {
@@ -164,19 +168,17 @@ function manageLocaleData(delay: number = 0) {
       };
     /// 获取现有的网页
     CTabs.get({}, tabs => {
-      const template: { [x: string]: unknown } = {};
-      /// 遍历已有的，并筛除不存在的
+      const idS: number[] = [];
+      tabs.forEach(el => el.id && idS.push(el.id));
       for (const key in refreshPageList) {
         if (Object.prototype.hasOwnProperty.call(refreshPageList, key)) {
-          for (const element of tabs) {
-            if (element.id === Number(key)) {
-              template[key] = refreshPageList[key];
-              break;
-            }
+          const element = refreshPageList[key];
+          if (idS.indexOf(element.id) == -1) {
+            delete refreshPageList[element.id];
           }
         }
       }
-      CLStorage.set({ refreshPageList: template });
+      CLStorage.set({ refreshPageList });
     });
   });
 }

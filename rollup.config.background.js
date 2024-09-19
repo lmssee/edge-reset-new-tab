@@ -17,7 +17,7 @@ export default {
         { src: 'src/css', dest: 'dist/' }, // 样式文件
         { src: 'src/icons', dest: 'dist/' }, // icons 图标
         { src: 'src/images', dest: 'dist/' }, // 图片静态资源
-        { src: '_locales', dest: 'dist/' }, // 本地化文件
+        { src: 'src/_locales', dest: 'dist/' }, // 本地化文件
         { src: 'src/newtab/index.css', dest: 'dist/newtab' },
         { src: 'src/newtab/index.html', dest: 'dist/newtab' },
         { src: 'src/popup/index.html', dest: 'dist/popup' },

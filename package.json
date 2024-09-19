@@ -11,24 +11,23 @@
     "build-background": "rollup --config rollup.config.background.js",
     "clear": "npx ixxx rm dist",
     "clean": "npx ixxx pkg -u rm node_modules && npm install && npm run build",
-    "": "",
-    "dev": "npm uninstall a-edge-extends-types && npm install --save-dev ../../npm/edge-extends-types/dist/ && npx ihot",
+    "r": "npm uninstall a-edge-extends-types && npm install ../../npm/edge-chrome",
     "beautify": "npm run prettier",
     "prettier": "npx prettier . --write",
     "eslint": "npx eslint src"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/lmssee/resetNewTab.git"
+    "url": "git+https://github.com/lmssee/edge-reset-new-tab.git"
   },
   "author": "lmssee <lmssee@outlook.com>  (https://lmssee.com)",
   "license": "ISC",
   "keywords": [
     "reset-new-tab"
   ],
-  "homepage": "https://lmssee.github.io/resetNewTab",
+  "homepage": "https://lmssee.com/reset-new-tab",
   "bugs": {
-    "url": "https://github.com/lmssee/resetNewTab/issues"
+    "url": "https://github.com/lmssee/edge-reset-new-tab/issues"
   },
   "devDependencies": {
     "@eslint/js": "^9.7.0",
@@ -37,9 +36,9 @@
     "@rollup/plugin-node-resolve": "^15.2.3",
     "@rollup/plugin-terser": "^0.4.4",
     "@rollup/plugin-typescript": "^11.1.6",
+    "@types/a-edge-extends-types": "file:../../npm/edge",
     "@types/node": "^20.14.11",
     "@types/rollup": "^0.51.4",
-    "a-edge-extends-types": "file:../../npm/edge-extends-types/dist",
     "eslint": "^8.57.0",
     "globals": "^15.8.0",
     "javascript-obfuscator": "^4.1.1",
@@ -50,6 +49,7 @@
     "typescript-eslint": "^7.16.1"
   },
   "dependencies": {
+    "a-edge-extends-types": "file:../../npm/edge-chrome",
     "a-js-tools": "^0.0.0"
   }
 }

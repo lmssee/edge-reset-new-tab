@@ -3,7 +3,6 @@ import resolve from '@rollup/plugin-node-resolve';
 import commonjs from '@rollup/plugin-commonjs';
 import json from '@rollup/plugin-json';
 import terser from '@rollup/plugin-terser';
-import { keepChrome } from 'a-edge-extends-types';
 
 /** 打包配置文件 */
 export default {
@@ -25,6 +24,5 @@ export default {
     typescript({}),
     // 可打包 json 内容 [配置](https://github.com/terser/terser#minify-options)
     terser(),
-    keepChrome(),
   ],
 };

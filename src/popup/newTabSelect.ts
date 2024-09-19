@@ -10,7 +10,7 @@
 import { CTabs } from 'src/common/chromeTabs';
 import { commonData } from './commandData';
 import { setStyle } from 'src/common/element';
-import { CSStorage } from 'src/common/chromeSStorage';
+import { CSStorage, newTabValueT } from 'src/common/chromeSStorage';
 
 /** 发送刷新的消息 */
 export function sendMessageToPage(message: unknown): undefined {
@@ -27,7 +27,12 @@ export function sendMessageToPage(message: unknown): undefined {
  * - addEvent         添加事件向元素
  * - init             初始化新标签页的相关内容
  */
-export const manageNewTabSelect = {
+export const manageNewTabSelect: {
+  node: HTMLElement | null;
+  valueList: newTabValueT['type'][];
+  addEvent(): undefined;
+  init(): undefined;
+} = {
   node: document.querySelector('div#manageNewTabSelect'),
   valueList: ['blankPage', 'recommend', 'customPage'],
   /** 向单选按钮组添加点击事件 */
@@ -44,7 +49,7 @@ export const manageNewTabSelect = {
         target.name === 'manageNewTab'
       ) {
         /** 取出 */
-        const { value } = target;
+        const value = target.value as newTabValueT['type'];
         //  储存该值 ，万一哪用得上
         commonData.newTabValue = value;
         /** 非自定义时触发值改变 */

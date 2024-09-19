@@ -18,6 +18,7 @@
     // 监听变化后，相对目录在再次启动前执行的命令
     // 这个属性应与 `watch` 元素相同
     beforeRestart: {
+      // src: 'npm uninstall a-edge-extends-types && npm install --save-dev ../../npm/edge-extends-types/dist/',
       // resetNewTab: 'npm  run build',
     },
   },

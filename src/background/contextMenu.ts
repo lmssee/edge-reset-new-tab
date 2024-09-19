@@ -7,24 +7,44 @@
  * @Description 功能菜单
  ****************************************************************************/
 
-import { chrome } from 'a-edge-extends-types';
-import { OnclickData } from 'a-edge-extends-types/contextMenus';
-import { Tab } from 'a-edge-extends-types/tab';
+import { CSStorage } from 'src/common';
 
 (() => {
-  console.log(chrome.i18n.getMessage('__MSG_name__'));
+  CSStorage.get(['contextMenu'], result => {
+    console.log(result);
+    console.log(result.contextMenu);
+    console.log(result.contextMenu && result.contextMenu!.visibility);
+  });
 
   chrome.contextMenus.create({
+    contexts: ['page'],
     id: '9863',
-    title: 'lmssee',
+    title: 'lmssee 的广告位',
   });
   chrome.contextMenus.create({
-    id: '9864',
+    id: '9870',
     parentId: '9863',
-    title: '真真的',
+    title: '无情的关闭',
   });
-  chrome.contextMenus.onClicked.addListener((info: OnclickData, tab: Tab) => {
-    console.log(info, tab);
+  chrome.contextMenus.create({
+    id: '9871',
+    parentId: '9863',
+    title: '狠心的关闭',
+  });
+
+  /// 注册监听事件
+  chrome.contextMenus.onClicked.addListener(info => {
+    if (Number(info.menuItemId) > 9869) {
+      CSStorage.set(
+        { contextMenu: { visibility: 'hidden' } },
+        (_r: unknown) => {
+          const result = _r as { [x: string]: boolean };
+          console.log('====================================');
+          console.log(result);
+          console.log('====================================');
+        },
+      );
+    }
   });
   console.log('====================================');
   console.log('右键执行');

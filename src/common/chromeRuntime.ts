@@ -7,8 +7,7 @@
  * @Description chrome.runtime 相关逻辑
  ****************************************************************************/
 
-import { chrome } from 'a-edge-extends-types';
-import { CmROMASender } from 'a-edge-extends-types/runtime';
+import { CmRuntimeSender } from 'a-edge-extends-types/runtime';
 
 const chromeRuntime = chrome.runtime;
 
@@ -21,7 +20,7 @@ export const CRuntime = {
    *
    */
   messageAddListener(
-    callback: (def: unknown, sender: CmROMASender) => undefined,
+    callback: (def: unknown, sender: CmRuntimeSender) => undefined,
   ): undefined {
     chromeRuntime.onMessage.addListener(callback);
   },
