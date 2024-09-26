@@ -7,12 +7,12 @@
  * @Description 定时刷新逻辑
  ****************************************************************************/
 
-import { debounce } from 'a-js-tools';
-import { commonData } from './commandData';
+import { throttle } from 'a-js-tools';
+import { popupData } from './popupData';
 import { sendMessageToPage } from './newTabSelect';
-import { CTabs } from 'src/common/chromeTabs';
-import { CLStorage, refreshDelayT } from 'src/common/chromeLStorage';
-import { setStyle } from 'src/common/element';
+import { CTabs } from '../common/chromeTabs';
+import { CLStorage, refreshDelayT } from '../common/chromeLStorage';
+import { setStyle } from '../common/element';
 
 /** 元素 `div#refreshBlock` 相关
  *
@@ -40,18 +40,21 @@ export const refreshButton = {
   addEvent() {
     /// 当按钮节点不存在，则直接返回
     if (!this.node) {
-      commonData.error();
+      popupData.error();
       return;
     }
     this.node.addEventListener(
       'click',
-      debounce(() => {
+      throttle(() => {
+        console.log(Date.now());
+
         /**  获取当前状态 */
         const delay = (
           this.node!.value === '待开启'
-            ? Math.max(commonData.refreshSelected, 1.2)
+            ? Math.max(popupData.refreshSelected, 1.2)
             : 0
         ) as refreshDelayT;
+
         /// 向特定页面发送消息
         sendMessageToPage({
           type: 'refresh',
@@ -59,9 +62,10 @@ export const refreshButton = {
           delay,
           visibilityState: true,
         });
-
+        console.log(Date.now());
         /// 更改文本展示
         this.setText(delay, true);
+        console.log(Date.now());
       }, 2000),
     );
   },
@@ -116,7 +120,7 @@ const timedRefreshSelect = {
   node: document.querySelector('div#timedRefreshSelect') as HTMLElement,
   show(delay: number) {
     /** 显示选择组的时候给定默认选择项 */
-    commonData.checked((commonData.refreshSelected = Number(delay)).toString());
+    popupData.checked((popupData.refreshSelected = Number(delay)).toString());
     setStyle(this.node, {
       height: '20px',
       opacity: '1',
@@ -133,7 +137,7 @@ const timedRefreshSelect = {
   /** 添加事件 */
   addEvent() {
     if (!this.node) {
-      commonData.error();
+      popupData.error();
       return;
     }
     const node = this.node;
@@ -143,7 +147,7 @@ const timedRefreshSelect = {
       target.nodeName.toLocaleLowerCase() === 'input' &&
         target.name === 'timedRefreshTime' &&
         manageLocaleData(
-          (commonData.refreshSelected = Number(target.value)) as refreshDelayT,
+          (popupData.refreshSelected = Number(target.value)) as refreshDelayT,
         );
     });
   },
@@ -154,7 +158,7 @@ const timedRefreshSelect = {
  * @param {number} delay  当前的状态，0 表示暂停定时刷新
  */
 function manageLocaleData(delay: refreshDelayT = 0) {
-  const { id } = commonData;
+  const { id } = popupData;
   CLStorage.get(['refreshPageList'], result => {
     /** 获取或新建  `refreshPageList` */
     const refreshPageList = result.refreshPageList || {};

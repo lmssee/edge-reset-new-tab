@@ -17,10 +17,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>我是你们看不见标题的弹出窗口</title>
-  <link rel="shortcut icon" href="../icons/popup.ico" type="image/x-icon" />
-  <!-- <script src="../../react/react.min.js"></script>
-  <script src="../../react/react-dom.min.js"></script>
-  <script src="../../react/babel.min.js"></script> -->
+  <link rel="shortcut icon" href="./icons/popup.ico" type="image/x-icon" />
   <link rel="stylesheet" href="../css/common.css">
   <link rel="stylesheet" href="../css/product.css">
   <link rel="stylesheet" href="./index.css" />
@@ -43,35 +40,11 @@
       </div>
     </div>
     <div id="customNewTabBlock">
-      <input type="text" id="customNewTabInput">
+      <input type="text" id="customNewTabInput" placeholder="edge://newtab">
       <!-- <input type="button" value="确认"> -->
     </div>
   </div>
-  <div id="refreshBlock">
-    <h1>
-      定时刷新页面
-    </h1>
-    <div>
-      当前状态：<input id="timedRefreshButton" type="button" value="查询中">
-    </div>
-    <div id="timedRefreshSelect">
-      <div>
-        <input type="radio" name="timedRefreshTime" value="1.2" id="radioA" hidden> <label for="radioA">1.2s</label>
-      </div>
-      <div>
-        <input type="radio" name="timedRefreshTime" value="2.4" id="radioB" hidden> <label for="radioB">2.4s</label>
-      </div>
-      <div>
-        <input type="radio" name="timedRefreshTime" value="3.6" id="radioC" hidden> <label for="radioC">3.6s</label>
-      </div>
-      <!-- <div>
-        <input type="radio" name="timedRefreshTime" value="0" id="radioD"><label for="radioD">自定义</label>
-      </div> -->
-    </div>
-    <!-- <div>
-      <input type="text" placeholder="请输入您想设置的定时"> <input type="button" value="锁定">
-    </div> -->
-  </div>
+
   <div class="footer">
     <ul>
       <li title="求 👍"><a href="https://github.com/lmssee/edge-reset-new-tab" target="_blank"
@@ -89,6 +62,6 @@
 
 
 </body>
-<script src="./index.js">  </script>
+
 
 </html>

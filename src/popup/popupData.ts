@@ -11,7 +11,7 @@
  *
  * 公共数据类型
  */
-type CommonDataT = {
+type PopupDataT = {
   /** 页面的 id ，在恢复数据时会用到 */
   id: number;
   /**  当前页面的 url */
@@ -21,9 +21,9 @@ type CommonDataT = {
   /** 储存被选择的值，用于在同一页面的再次展示 */
   refreshSelected: number;
   /** 监控树列表 */
-  watchList: { [x: string]: (() => void)[] };
+  observeList: { [x: string]: (() => void)[] };
   /** 监控方法 */
-  watch(
+  observe(
     property: string,
     callback: (property?: string, newValue?: unknown) => void,
   ): void;
@@ -39,7 +39,7 @@ type CommonDataT = {
 /** # 公共数据原始数据
  * - id
  */
-const commonDataOrigin: CommonDataT = {
+const commonDataOrigin: PopupDataT = {
   /** 页面的 id ，在恢复数据时会用到 */
   id: 0,
   /**  当前页面的 url */
@@ -59,16 +59,16 @@ const commonDataOrigin: CommonDataT = {
   },
 
   /** 可控制的列表 */
-  watchList: {},
+  observeList: {},
   /** 可执行监控 */
-  watch(
+  observe(
     property: string,
     callback: (property?: string, newValue?: unknown) => void,
   ) {
-    const watchList = this.watchList as { [x: string]: (() => void)[] };
-    const _p = watchList[property] || [];
+    const observeList = this.observeList as { [x: string]: (() => void)[] };
+    const _p = observeList[property] || [];
     _p.push(callback);
-    watchList[property] = _p;
+    observeList[property] = _p;
   },
 };
 
@@ -80,12 +80,12 @@ const commonDataOrigin: CommonDataT = {
  * - checked(value)         切换默认选择，用户初始化和候选
  * - error()                弹出一个 error 的弹窗
  */
-export const commonData: CommonDataT = new Proxy(commonDataOrigin, {
+export const popupData: PopupDataT = new Proxy(commonDataOrigin, {
   get(obj, property, receive) {
     return Reflect.get(obj, property, receive);
   },
   set(obj, property, newValue, receive) {
-    const template = obj.watchList[property as string] as (() => void)[];
+    const template = obj.observeList[property as string] as (() => void)[];
     if (template) {
       for (const callback of template) {
         Reflect.apply(callback, obj, [property, newValue]);

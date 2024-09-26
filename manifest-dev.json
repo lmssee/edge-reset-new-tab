@@ -31,6 +31,19 @@
       "128": "./icons/ico@128x128.png"
     }
   },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>",
+        "http://*/*",
+        "file://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "./reload.js"
+      ]
+    }
+  ],
   "background": {
     "service_worker": "./background.js"
   },

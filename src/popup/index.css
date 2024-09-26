@@ -53,14 +53,6 @@
    height: 80px;
    overflow: hidden;
 
-   /** 输入框 */
-   input[type="text"] {
-     width: 200px;
-     border-radius: 10px;
-
-   }
-
-
    & input[type="button"] {
      width: 48px;
      margin: 0px;
@@ -68,21 +60,6 @@
    }
  }
 
-
- /** 定时刷新按钮 */
- #timedRefreshButton {
-   border-radius: 6px;
-   padding: 1px 10px;
-   border: none;
-   box-shadow: none;
-   transition: box-shadow 0.4s;
- }
-
- #timedRefreshButton:hover {
-
-   box-shadow: var(--box-shadow);
-   transition: box-shadow 0.8s;
- }
 
  :is(div#manageNewTabSelect,
    div#timedRefreshSelect) {
@@ -111,8 +88,9 @@
        padding-block: 0px;
 
        &:focus-visible {
+
          outline: none;
-         box-shadow: 1px 1px 6px #0ff6;
+         box-shadow: 1px 1px 6px #fff inset, -1px -1px 6px #fff inset, -1px 1px 6px #fff inset, 1px -1px 6px #fff inset;
        }
      }
    }

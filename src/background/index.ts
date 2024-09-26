@@ -7,8 +7,8 @@
  * @Description 设定背景逻辑
  ****************************************************************************/
 
-import { CLStorage, CRuntime, CTabs } from 'src/common';
-import { CmStorageLocalValueT } from 'src/common/chromeLStorage';
+import { CLStorage, CRuntime, CTabs } from '../common';
+import { CmStorageLocalValueT } from '../common/chromeLStorage';
 
 /** 将右键的执行代码放进来 */
 import './contextMenu';
@@ -19,8 +19,7 @@ import './contextMenu';
  *
  */
 const message = {
-  /** 页面的 id */
-  /** 发送消息
+  /** 向发送消息
    * @param  {number}  id            要发给的 id
    * @param  {any}  msg           要发送的消息
    * @param  {function|undefined} callback      回调方法
@@ -39,13 +38,12 @@ const message = {
 };
 
 /// 获取当前刷新状态
-// getState();
 /**
  * 作为背景逻辑，获取正在刷新的页面发送的消息。然后判断是否出发再次刷新
  *
  * 在页面被隐藏时，即  `tab` 的 `active` 为 `false` 时，发送
  *  */
-CRuntime.messageAddListener((_r: unknown, sender) => {
+CRuntime.messageAddListener((_r, sender) => {
   const response = _r as { [x: string]: number | string };
   /// 非礼勿视
   if (response['to'] !== 'backgroundJS') return;
@@ -92,25 +90,6 @@ CRuntime.messageAddListener((_r: unknown, sender) => {
     });
 });
 
-/**
- *  获取本地储存的定时刷新页面的值
- *
- * ```ts
- *  type CmStorageLocalValueT = {
- *      refreshPageList?: {
- *          [x: number]: {
- *              state?: "refresh" | "suspend";
- *              id: number;
- *          };
- *      };
- *  }
- * ```
- */
-function getLocalRefreshList(
-  callBack: (result: CmStorageLocalValueT) => undefined,
-) {
-  CLStorage.get(['refreshPageList'], callBack);
-}
 getState;
 /**
  * 获取当前刷新页面的状态
@@ -144,4 +123,23 @@ function getState() {
       console.log('====================================\n\n');
     });
   });
+}
+/**
+ *  获取本地储存的定时刷新页面的值
+ *
+ * ```ts
+ *  type CmStorageLocalValueT = {
+ *      refreshPageList?: {
+ *          [x: number]: {
+ *              state?: "refresh" | "suspend";
+ *              id: number;
+ *          };
+ *      };
+ *  }
+ * ```
+ */
+function getLocalRefreshList(
+  callBack: (result: CmStorageLocalValueT) => undefined,
+) {
+  CLStorage.get(['refreshPageList'], callBack);
 }

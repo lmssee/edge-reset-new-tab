@@ -8,8 +8,8 @@
  *
  * - 向页面添加一个悬浮钮
  ****************************************************************************/
-import { setStyle } from 'src/common/element';
-import { message } from './message';
+import { CRuntime } from 'src/common';
+import { setStyle } from '../common/element';
 
 /** 执行一个页面重新加载组建 */
 (() => {
@@ -39,7 +39,7 @@ import { message } from './message';
   element.addEventListener('click', () => {
     createACover();
     pageReload();
-    message.reloadExtend();
+    CRuntime.sendMessage({ type: 'reloadExtend', to: 'backgroundJS' });
   });
   element.addEventListener('contextmenu', () => pageReload());
   document.body.appendChild(element);

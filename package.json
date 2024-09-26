@@ -1,17 +1,16 @@
 {
+  "license": "ISC",
   "type": "module",
-  "version": "0.0.4",
+  "version": "0.0.2",
   "name": "reset-new-tab",
   "description": "重置 edge 新标签页源码",
+  "homepage": "https://lmssee.com/reset-new-tab",
+  "author": "lmssee <lmssee@outlook.com>  (https://lmssee.com)",
   "scripts": {
-    "build": "npx ixxx rm dist && npm run build-popup ",
-    "build-popup": "rollup --config rollup.config.popup.js && npm run build-newtab ",
-    "build-newtab": "rollup --config rollup.config.newtab.js && npm run build-content",
-    "build-content": "rollup --config rollup.config.content.js && npm run build-background ",
-    "build-background": "rollup --config rollup.config.background.js",
-    "clear": "npx ixxx rm dist",
-    "clean": "npx ixxx pkg -u rm node_modules && npm install && npm run build",
-    "r": "npm uninstall a-edge-extends-types && npm install ../../npm/edge-chrome",
+    "build": "npm run rm && webpack ",
+    "dev": "npm run rm && webpack -w --env dev",
+    "start": "npm run rm && webpack serve --env dev",
+    "rm": "npx ixxx rm dist",
     "beautify": "npm run prettier",
     "prettier": "npx prettier . --write",
     "eslint": "npx eslint src"
@@ -20,36 +19,50 @@
     "type": "git",
     "url": "git+https://github.com/lmssee/edge-reset-new-tab.git"
   },
-  "author": "lmssee <lmssee@outlook.com>  (https://lmssee.com)",
-  "license": "ISC",
   "keywords": [
     "reset-new-tab"
   ],
-  "homepage": "https://lmssee.com/reset-new-tab",
   "bugs": {
     "url": "https://github.com/lmssee/edge-reset-new-tab/issues"
   },
   "devDependencies": {
+    "@babel/core": "^7.25.2",
+    "@babel/preset-env": "^7.25.4",
+    "@babel/preset-react": "^7.24.7",
+    "@babel/preset-typescript": "^7.24.7",
     "@eslint/js": "^9.7.0",
-    "@rollup/plugin-commonjs": "^25.0.8",
-    "@rollup/plugin-json": "^6.1.0",
-    "@rollup/plugin-node-resolve": "^15.2.3",
-    "@rollup/plugin-terser": "^0.4.4",
-    "@rollup/plugin-typescript": "^11.1.6",
-    "@types/a-edge-extends-types": "file:../../npm/edge",
     "@types/node": "^20.14.11",
-    "@types/rollup": "^0.51.4",
+    "@types/react": "^18.3.8",
+    "@types/react-dom": "^18.3.0",
+    "@types/react-redux": "^7.1.33",
+    "@types/redux-persist": "^4.0.0",
+    "a-edge-extends-types": "^0.0.10",
+    "autoprefixer": "^10.4.20",
+    "babel-loader": "^9.2.1",
+    "copy-webpack-plugin": "^12.0.2",
+    "css-loader": "^7.1.2",
     "eslint": "^8.57.0",
     "globals": "^15.8.0",
-    "javascript-obfuscator": "^4.1.1",
+    "html-webpack-plugin": "^5.6.0",
+    "postcss-loader": "^8.1.1",
     "prettier": "3.3.2",
-    "rollup-plugin-copy": "^3.5.0",
-    "rollup-plugin-obfuscator": "^1.1.0",
-    "typescript": "^5.5.3",
-    "typescript-eslint": "^7.16.1"
+    "sass": "^1.79.2",
+    "sass-loader": "^16.0.1",
+    "style-loader": "^4.0.0",
+    "ts-loader": "^9.5.1",
+    "typescript": "^5.6.2",
+    "typescript-eslint": "^7.16.1",
+    "webpack": "^5.94.0",
+    "webpack-cli": "^5.1.4",
+    "webpack-dev-server": "^5.1.0"
   },
   "dependencies": {
-    "a-edge-extends-types": "file:../../npm/edge-chrome",
-    "a-js-tools": "^0.0.0"
+    "@reduxjs/toolkit": "^2.2.7",
+    "a-js-tools": "^0.0.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-redux": "^9.1.2",
+    "redux": "^5.0.1",
+    "redux-persist": "^6.0.0"
   }
 }

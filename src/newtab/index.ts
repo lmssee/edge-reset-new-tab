@@ -11,7 +11,7 @@
 
 /** 引入公共执行部分 */
 
-import { CLChanged } from 'src/common';
+import { CLChanged } from '../common';
 import '../common/page'; /// 引入公共代码部分
 import '../content/development'; /// 引入开发需要
 
