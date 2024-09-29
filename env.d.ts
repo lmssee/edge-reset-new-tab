@@ -1,14 +1,27 @@
-declare module '*.module.scss' {
+declare module '*newtab.module.scss' {
   const classes: {
     /** 页面，在弹窗口使用 */
-    footer: string;
-    /** 定时刷新 */
-    timeRefresh: string;
-    /** 时间展示 */
-    timeShow: string;
-    /** 悬浮按钮 */
-    floatButton: string;
+    loading: string;
   };
+  export default classes;
+}
+
+declare module '*blank.module.scss' {
+  const classes: {
+    blankPage: string;
+  };
+  export default classes;
+}
+
+/** popup 的页面样式 */
+declare module '*popup.module.scss' {
+  const classes: {
+    /** 刷新块 */
+    timeRefresh: string;
+    /** popup 输入框 */
+    popupInputParent: string;
+  };
+
   export default classes;
 }
 

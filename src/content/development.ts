@@ -37,11 +37,15 @@ import { setStyle } from '../common/element';
   element.innerHTML = '⟲';
   element.title = '重加载扩展 reset new tab';
   element.addEventListener('click', () => {
+    setStyle(element, { visibility: 'hidden' });
     createACover();
     pageReload();
     CRuntime.sendMessage({ type: 'reloadExtend', to: 'backgroundJS' });
   });
-  element.addEventListener('contextmenu', () => pageReload());
+  element.addEventListener('contextmenu', e => {
+    pageReload();
+    e.preventDefault();
+  });
   document.body.appendChild(element);
 
   /// 一个友好的遮盖层

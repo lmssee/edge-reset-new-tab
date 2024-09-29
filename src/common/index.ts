@@ -7,22 +7,14 @@
  * @Description 公共的逻辑
  ****************************************************************************/
 
-export { CLStorage } from './chromeLStorage';
-export { CTabs } from './chromeTabs';
+import { CmStorageChanged } from './chromeSStorage';
+
 export { CSStorage } from './chromeSStorage';
 export { CRuntime } from './chromeRuntime';
 /** 监听 storage 数据变化 */
 
 export function CLChanged(
-  callback: (
-    pref: {
-      [key: string]: {
-        oldValue: unknown;
-        newValue: unknown;
-      };
-    },
-    areaName: 'local' | 'sync',
-  ) => undefined,
+  callback: (changes: CmStorageChanged, areaName: string) => void,
 ) {
-  chrome.storage.onChanged.addListener(callback);
+  chrome.storage.onChanged.addListener(callback as () => void);
 }

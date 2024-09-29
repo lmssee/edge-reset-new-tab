@@ -55,10 +55,6 @@
     "description": "反馈建议，用于 popup 底部 ico 第四个图标的 title",
     "message": "bug 反馈"
   },
-  "popup_input_placeholder": {
-    "description": "popup 输入框 placeholder 占位文本",
-    "message": "自定义网址"
-  },
   "recommend_page": {
     "description": "推荐页，展示于 popup 的单选按钮组内",
     "message": "推荐页"
@@ -66,6 +62,10 @@
   "custom_page": {
     "description": "自定义页，展示于 popup 的单选按钮组内",
     "message": "自定义"
+  },
+  "popup_input_placeholder": {
+    "description": "popup 输入框 placeholder 占位文本",
+    "message": "自定义网址"
   },
   "blank_page": {
     "description": "空白页，展示于 popup 的选项内",

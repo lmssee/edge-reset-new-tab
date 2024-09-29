@@ -24,12 +24,7 @@
   "homepage_url": "https://lmssee.com/reset-new-tab",
   "chrome_url_overrides": {
     "newtab": "./newtab/index.html",
-    "default_icon": {
-      "16": "./icons/ico@16x16.png",
-      "32": "./icons/ico@32x32.png",
-      "48": "./icons/ico@48x48.png",
-      "128": "./icons/ico@128x128.png"
-    }
+    "default_icon": "./icons/favicon.ico"
   },
   "background": {
     "service_worker": "./background.js"

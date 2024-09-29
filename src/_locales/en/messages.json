@@ -9,6 +9,66 @@
   },
   "short_name": {
     "description": "昵称",
-    "message": "r_n_t"
+    "message": "re"
+  },
+  "new_tab_title": {
+    "description": "新标签页标题",
+    "message": "new tab"
+  },
+  "monday": {
+    "description": "周一",
+    "message": "Monday"
+  },
+  "tuesday": {
+    "description": "周二",
+    "message": "Tuesday"
+  },
+  "wednesday": {
+    "description": "周三",
+    "message": "Wednesday"
+  },
+  "thursday": {
+    "description": "周四",
+    "message": "Thursday"
+  },
+  "friday": {
+    "description": "周五",
+    "message": "Friday"
+  },
+  "saturday": {
+    "description": "周六",
+    "message": "Saturday"
+  },
+  "sunday": {
+    "description": "周日",
+    "message": "Sunday"
+  },
+  "popup_h1": {
+    "description": "弹窗标题",
+    "message": "reset new tab"
+  },
+  "email_feedback": {
+    "description": "邮件反馈，用于 popup 底部 ico 第二个图标的 title",
+    "message": "email feedback"
+  },
+  "bug_feedback": {
+    "description": "反馈建议，用于 popup 底部 ico 第四个图标的 title",
+    "message": "bug feedback"
+  },
+  "popup_input_placeholder": {
+    "description": "popup 输入框 placeholder 占位文本",
+    "message": "Enter custom new tab URL"
+  },
+  "recommend_page": {
+    "description": "推荐页，展示于 popup 的单选按钮组内",
+    "message": "recommend"
+  },
+  "custom_page": {
+    "description": "自定义页，展示于 popup 的单选按钮组内",
+    "message": "custom"
+  },
+  "blank_page": {
+    "description": "空白页，展示于 popup 的选项内",
+    "message": "blank"
   }
 }

@@ -34,7 +34,19 @@ export const CSStorage = {
   ) {
     chromeStorageSync.get(attributeList, callBack);
   },
-  /**  储存新的刷新页面数剧到 `chrome.storage.sync` */
+  /**  储存新的刷新页面数剧到 `chrome.storage.sync`
+   *
+   *  ```ts
+   *
+   *  type CmStorageSyncValueT = {
+   *    contextMenu?: contextMenuValueT;
+   *     newTab?: newTabValueT;
+   *  };
+   *
+   * ```
+   *
+   *
+   */
   set(data: CmStorageSyncValueT, callback?: (result: unknown) => undefined) {
     (typeof callback === 'function' &&
       (chromeStorageSync.set(data, callback), true)) ||
@@ -48,19 +60,33 @@ export const CSStorage = {
   },
 };
 
-/** contextMenu 值类型 */
+/** contextMenu 值 */
 export type contextMenuValueT = {
   visibility: 'visible' | 'hidden' | undefined;
 };
 
-/** newTab 值类型  */
+/** newTab 值  */
 export type newTabValueT = {
-  type: 'blankPage' | 'blankPage' | 'recommend' | 'customPage';
+  type?: string;
+  url?: string;
 };
 
 /** `chrome.storage.sync` 的值类型  */
-
 export type CmStorageSyncValueT = {
   contextMenu?: contextMenuValueT;
   newTab?: newTabValueT;
+};
+
+/**
+ * 监听数据变化时数据
+ */
+export type CmStorageChanged = {
+  contextMenu?: {
+    newValue: contextMenuValueT;
+    oldValue: contextMenuValueT;
+  };
+  newTab?: {
+    newValue: newTabValueT;
+    oldValue: newTabValueT;
+  };
 };

@@ -69,7 +69,6 @@ export default function ({ dev }) {
               modules: true,
             },
           },
-          'resolve-url-loader',
           'postcss-loader',
           'sass-loader',
         ],
@@ -94,7 +93,7 @@ export default function ({ dev }) {
   /** 插件 */
   const plugins = [
     new HtmlWebpackPlugin({
-      template: './src/popup/index.html',
+      template: 'index.html',
       filename: 'popup/index.html',
       chunks: ['popup'],
       inject: 'body',
@@ -104,7 +103,7 @@ export default function ({ dev }) {
     }),
     /// new tab 页面 html 配置
     new HtmlWebpackPlugin({
-      template: './src/newtab/index.html',
+      template: './index.html',
       filename: 'newtab/index.html',
       chunks: ['newtab'],
       inject: 'body',
@@ -116,7 +115,7 @@ export default function ({ dev }) {
     new CopyPlugin({
       patterns: [
         {
-          from: `manifest${(dev && '-dev') || ''}.json`,
+          from: `manifest.json`,
           to: 'manifest.json',
         },
         { from: 'src/icons', to: 'icons' },
