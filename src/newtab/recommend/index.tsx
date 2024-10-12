@@ -2,14 +2,21 @@
  * @Author lmssee
  * @Email lmssee@outlook.com
  * @ProjectName reset new tab
- * @FileName loading.tsx
+ * @FileName index.tsx
  * @CreateDate  周日  09/29/2024
- * @Description 加载中页面
+ * @Description
  ****************************************************************************/
 
 import React from 'react';
-import styles from './newtab.module.scss';
+import { getLocaleText } from 'src/common/getLocaleText';
+import styles from './index.module.scss';
 
-export function Loading() {
-  return <div className={styles.loading}>加载中....</div>;
+export function Recommend() {
+  document.title = getLocaleText('recommend_title');
+
+  return <div className={styles.main}>
+
+  
+
+  </div>;
 }

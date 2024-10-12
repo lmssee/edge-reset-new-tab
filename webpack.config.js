@@ -119,7 +119,6 @@ export default function ({ dev }) {
           to: 'manifest.json',
         },
         { from: 'src/icons', to: 'icons' },
-
         { from: 'src/_locales', to: '_locales' },
       ],
     }),
@@ -129,7 +128,9 @@ export default function ({ dev }) {
   const optimization = {
     mangleExports: 'size',
     mangleWasmImports: false,
-    // runtimeChunk: 'single',
+    splitChunks: {
+      chunks: 'all',
+    },
   };
 
   /** 开发服务

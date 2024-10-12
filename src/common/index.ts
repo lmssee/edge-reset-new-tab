@@ -7,7 +7,7 @@
  * @Description 公共的逻辑
  ****************************************************************************/
 
-import { CmStorageChanged } from './chromeSStorage';
+import { CmStorageChanged } from './types';
 
 export { CSStorage } from './chromeSStorage';
 export { CRuntime } from './chromeRuntime';

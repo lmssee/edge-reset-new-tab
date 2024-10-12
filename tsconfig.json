@@ -15,18 +15,9 @@
     "strict": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
-    "lib": [
-      "ESNext",
-      "DOM",
-    ],
-    "sourceMap": false,
+    "lib": ["ESNext", "DOM"],
+    "sourceMap": false
   },
-  "include": [
-    "src/**/*.ts",
-    "src/**/*.tsx",
-    "**.d.ts",
-  ],
-  "exclude": [
-    "dist"
-  ],
+  "include": ["src/**/*.ts", "src/**/*.tsx", "**.d.ts"],
+  "exclude": ["dist"]
 }

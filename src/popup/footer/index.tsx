@@ -42,8 +42,7 @@ export function Footer(): React.JSX.Element {
   ];
 
   return (
-    <div className={styles && styles.footer}>
-      {/* <div className="footer"> */}{' '}
+    <div className={styles.index}>
       <ul>
         {dataList.map(ele => (
           <li title={ele.title} key={ele.title}>

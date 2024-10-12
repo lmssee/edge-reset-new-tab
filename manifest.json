@@ -31,9 +31,5 @@
   },
   "default_locale": "en",
   "update_url": "https://edge.microsoft.com/extensionwebstorebase/v1/crx",
-  "permissions": [
-    "scripting",
-    "storage",
-    "contextMenus"
-  ]
+  "permissions": ["scripting", "storage", "contextMenus"]
 }

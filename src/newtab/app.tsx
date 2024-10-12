@@ -5,8 +5,9 @@ import { BlankPage } from './blankPage';
 import { useSelector } from 'react-redux';
 import { StoreState, storeSyncList } from './store/storeData';
 import { useDispatch } from 'react-redux';
-import { CSStorage, newTabValueT } from 'src/common/chromeSStorage';
+import { CSStorage } from 'src/common/chromeSStorage';
 import { Loading } from './loading';
+import { Recommend } from './recommend';
 
 /** 根元素 */
 export function App() {
@@ -36,8 +37,8 @@ export function App() {
       type: storeSyncList.init_new_tab_info,
       payload: { selected, url },
     });
+    /// 转向设定的网址
     if (selected === 'custom' && url) window.location.replace(url);
-    // setTimeout(() => window.location.replace(url), 1200);
   }
 
   /** ico 配置 */
@@ -65,8 +66,7 @@ export function App() {
   return (
     <>
       {(url !== '' && pageState === 'custom' && <Loading />) ||
-        (pageState === 'blank' && <BlankPage />) ||
-        pageState}
+        (pageState === 'recommend' && <Recommend />) || <BlankPage />}
     </>
   );
 }

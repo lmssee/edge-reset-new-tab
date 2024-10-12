@@ -3,6 +3,7 @@
     "immm",
     "newtab",
     "persistor",
-    "reduxjs"
+    "reduxjs",
+    "tseslint"
   ]
 }

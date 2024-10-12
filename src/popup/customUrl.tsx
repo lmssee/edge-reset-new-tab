@@ -63,9 +63,6 @@ export function CustomUrl() {
 
   /// 根据输入框的内容变化进行创建状态框
   useEffect(() => {
-    console.log('document', document.activeElement);
-    console.log('input current', input.current);
-    console.log('focus', input.current);
     if (document.activeElement === input.current) setSpanText(['⟲', '']);
   }, [inputValue]);
 

@@ -1,11 +1,11 @@
 {
   "name": {
     "description": "默认的名称",
-    "message": "重置新标签页（随心版）"
+    "message": "重置新標籤頁"
   },
   "description": {
     "description": "版本的描述",
-    "message": "是一款简单的插件，用于自定义新创空白标签页。当然，您可以自定义页面的 url ，或者使用给出的自定义页面定义你的新标签页"
+    "message": "是一款簡單的外掛程式，用於自定義新創空白標籤頁。 當然，您可以自定義頁面的 url ，或者使用給出的自定義頁面定義你的新標籤頁"
   },
   "short_name": {
     "description": "昵称",
@@ -13,35 +13,35 @@
   },
   "new_tab_title": {
     "description": "新标签页标题",
-    "message": "新建标签页"
+    "message": "新建標籤頁"
   },
   "monday": {
     "description": "周一",
-    "message": "周一"
+    "message": "週一"
   },
   "tuesday": {
     "description": "周二",
-    "message": "周二"
+    "message": "週二"
   },
   "wednesday": {
     "description": "周三",
-    "message": "周三"
+    "message": "週三"
   },
   "thursday": {
     "description": "周四",
-    "message": "周四"
+    "message": "週四"
   },
   "friday": {
     "description": "周五",
-    "message": "周五"
+    "message": "週五"
   },
   "saturday": {
     "description": "周六",
-    "message": "周六"
+    "message": "週六"
   },
   "sunday": {
     "description": "周日",
-    "message": "周日"
+    "message": "週日"
   },
   "popup_h1": {
     "description": "弹窗标题",
@@ -49,26 +49,30 @@
   },
   "email_feedback": {
     "description": "邮件反馈，用于 popup 底部 ico 第二个图标的 title",
-    "message": "邮件反馈"
+    "message": "郵件迴響"
   },
   "bug_feedback": {
     "description": "反馈建议，用于 popup 底部 ico 第四个图标的 title",
-    "message": "bug 反馈"
+    "message": "bug 迴響"
   },
   "recommend_page": {
     "description": "推荐页，展示于 popup 的单选按钮组内",
-    "message": "推荐页"
+    "message": "推薦頁"
   },
   "custom_page": {
     "description": "自定义页，展示于 popup 的单选按钮组内",
-    "message": "自定义"
+    "message": "自訂"
   },
   "popup_input_placeholder": {
     "description": "popup 输入框 placeholder 占位文本",
-    "message": "自定义网址"
+    "message": "自訂網址"
   },
   "blank_page": {
     "description": "空白页，展示于 popup 的选项内",
-    "message": "空白页"
+    "message": "空白頁"
+  },
+  "recommend_title": {
+    "description": "当选择 recommend 时的网页 title",
+    "message": "世界因你而美"
   }
 }

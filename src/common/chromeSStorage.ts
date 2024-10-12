@@ -7,6 +7,8 @@
  * @Description chrome.storage.sync 相关内容
  ****************************************************************************/
 
+import { SyncKeyList, CmStorageSyncValue } from './types';
+
 const chromeStorageSync = chrome.storage.sync;
 
 /** # 保存在云端的数据
@@ -29,10 +31,10 @@ export const CSStorage = {
    * @param {function} call  Back 回调函数
    */
   get(
-    attributeList: ('contextMenu' | 'newTab')[],
-    callBack: (result: CmStorageSyncValueT) => undefined,
+    attributeList: SyncKeyList[],
+    callBack: (result: CmStorageSyncValue) => void,
   ) {
-    chromeStorageSync.get(attributeList, callBack);
+    chromeStorageSync.get(attributeList, callBack as () => void);
   },
   /**  储存新的刷新页面数剧到 `chrome.storage.sync`
    *
@@ -47,46 +49,15 @@ export const CSStorage = {
    *
    *
    */
-  set(data: CmStorageSyncValueT, callback?: (result: unknown) => undefined) {
+  set(data: CmStorageSyncValue, callback?: (result: unknown) => undefined) {
     (typeof callback === 'function' &&
       (chromeStorageSync.set(data, callback), true)) ||
       chromeStorageSync.set(data);
   },
   /** 移除云端数据 */
-  remove(keys: string[], callback = undefined) {
+  remove(keys: SyncKeyList[], callback = undefined) {
     (typeof callback === 'function' &&
       (chromeStorageSync.remove(keys, callback), true)) ||
       chromeStorageSync.remove(keys);
   },
-};
-
-/** contextMenu 值 */
-export type contextMenuValueT = {
-  visibility: 'visible' | 'hidden' | undefined;
-};
-
-/** newTab 值  */
-export type newTabValueT = {
-  type?: string;
-  url?: string;
-};
-
-/** `chrome.storage.sync` 的值类型  */
-export type CmStorageSyncValueT = {
-  contextMenu?: contextMenuValueT;
-  newTab?: newTabValueT;
-};
-
-/**
- * 监听数据变化时数据
- */
-export type CmStorageChanged = {
-  contextMenu?: {
-    newValue: contextMenuValueT;
-    oldValue: contextMenuValueT;
-  };
-  newTab?: {
-    newValue: newTabValueT;
-    oldValue: newTabValueT;
-  };
 };

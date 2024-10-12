@@ -70,5 +70,9 @@
   "blank_page": {
     "description": "空白页，展示于 popup 的选项内",
     "message": "blank"
+  },
+  "recommend_title": {
+    "description": "当选择 recommend 时的网页 title",
+    "message": "World beautiful because of you"
   }
 }

@@ -14,8 +14,20 @@ body {
   padding: 10px 20px 40px;
   box-shadow: 1px 1px 8px #fff;
   background-image: linear-gradient(to top, #fffe, #fffe),
-    linear-gradient(45deg, transparent 40%, #000a 45%, #000a 55%, transparent 60%),
-    linear-gradient(-45deg, transparent 40%, #000a 45%, #000a 55%, transparent 60%);
+    linear-gradient(
+      45deg,
+      transparent 40%,
+      #000a 45%,
+      #000a 55%,
+      transparent 60%
+    ),
+    linear-gradient(
+      -45deg,
+      transparent 40%,
+      #000a 45%,
+      #000a 55%,
+      transparent 60%
+    );
   background-size: 48px 48px;
   background-position: 0px 0px;
   animation: 1s linear 0s infinite alternate bodyBoxShadow;
@@ -29,7 +41,14 @@ h1 {
   line-height: 48px;
   font-variant: 1;
   color: transparent;
-  background-image: linear-gradient(to left top, #333, #000 10%, #000 30%, #066, #660);
+  background-image: linear-gradient(
+    to left top,
+    #333,
+    #000 10%,
+    #000 30%,
+    #066,
+    #660
+  );
   background-size: 200% 200%;
   background-clip: text;
   font-weight: 600;

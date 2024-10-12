@@ -1,9 +1,9 @@
 :root {
   --box-shadow: 0 5px 13px 0 rgba(10, 15, 71, 0.2);
-    --font-mono: ui-monospace, Menlo, Monaco, 'Cascadia Mono', 'Segoe UI Mono',
+  --font-mono: ui-monospace, Menlo, Monaco, 'Cascadia Mono', 'Segoe UI Mono',
     'Roboto Mono', 'Oxygen Mono', 'Ubuntu Monospace', 'Source Code Pro',
     'Fira Mono', 'Droid Sans Mono', 'Courier New', monospace;
-     --mi-white: #ffffff;
+  --mi-white: #ffffff;
   --mi-mi-white: #f0f2e6;
   --mi-dark-blue: #465e65;
   --mi-mi-yellow: #c2c6ae;
@@ -62,7 +62,7 @@ blockquote::before,
 blockquote::after,
 q::before,
 q::after {
-  content: "";
+  content: '';
   content: none;
 }
 
@@ -71,13 +71,13 @@ table {
   border-spacing: 0;
 }
 
-input[type="button"],
+input[type='button'],
 .cursor-pointer {
   cursor: pointer;
 }
 
 /** 输入框 */
-input[type="text"] {
+input[type='text'] {
   width: 200px;
   border-radius: 10px;
   background-color: #000;
@@ -92,19 +92,17 @@ input[type="text"] {
   }
 }
 
-
-
 input[type='radio'] {
   width: 0;
   height: 0;
   overflow: hidden;
 
-  +label {
+  + label {
     padding-left: 15px;
 
     &::before,
     &::after {
-      content: "";
+      content: '';
       position: absolute;
       border-radius: 50%;
       top: 50%;
@@ -135,15 +133,16 @@ input[type='radio'] {
     }
   }
 
-
   &:checked {
     color: #f00;
 
-    &+label {
+    & + label {
       color: #0a3;
 
       &::before {
-        box-shadow: 1px 1px 3px #0f3, -1px -1px 3px #0f3;
+        box-shadow:
+          1px 1px 3px #0f3,
+          -1px -1px 3px #0f3;
       }
 
       &::after {
@@ -155,14 +154,12 @@ input[type='radio'] {
   }
 }
 
-
 .center {
   position: absolute;
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
 }
-
 
 img {
   -webkit-touch-callout: none;
