@@ -8,6 +8,7 @@ import { useDispatch } from 'react-redux';
 import { CSStorage } from 'src/common/chromeSStorage';
 import { Loading } from './loading';
 import { Recommend } from './recommend';
+import { NewTabValue } from 'src/common/types';
 
 /** 根元素 */
 export function App() {
@@ -29,7 +30,7 @@ export function App() {
   const dispatch = useDispatch();
 
   /** 设置新的值，发生在初始化或当前页面展示时接收到变化值 */
-  function setValue(value: newTabValueT) {
+  function setValue(value: NewTabValue) {
     const selected = value.type;
     const url = value.url;
     /// 设定新的值

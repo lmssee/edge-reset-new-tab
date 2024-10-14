@@ -24,7 +24,7 @@ import tabReducer from './tabSlice';
 const persistConfig = {
   key: 'root',
   storage,
-  whitelist: ['tab'],
+  whitelist: [],
 };
 
 const reducer = { tab: tabReducer };

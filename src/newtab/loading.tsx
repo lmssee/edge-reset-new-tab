@@ -9,7 +9,10 @@
 
 import React from 'react';
 import styles from './newtab.module.scss';
+import { getLocaleText } from 'src/common/getLocaleText';
 
+/** 中转页面 */
 export function Loading() {
-  return <div className={styles.loading}>加载中....</div>;
+  const text = getLocaleText('loading');
+  return <div className={`${styles.loading}  colorText`}>{text}....</div>;
 }

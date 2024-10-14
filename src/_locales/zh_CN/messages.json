@@ -43,6 +43,18 @@
     "description": "周日",
     "message": "周日"
   },
+  "loading": {
+    "description": "加载中，用于页面跳转的友好提示",
+    "message": "加载中"
+  },
+  "tab_search_placeholder": {
+    "description": "新标签页的检索输入框的 placeholder 文本",
+    "message": "输入点啥"
+  },
+  "search_text": {
+    "description": "搜索（文本-用在按钮处）",
+    "message": "搜索"
+  },
   "popup_h1": {
     "description": "弹窗标题",
     "message": "重置新标签页"

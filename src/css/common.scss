@@ -1,8 +1,7 @@
 :root {
   --box-shadow: 0 5px 13px 0 rgba(10, 15, 71, 0.2);
-  --font-mono: ui-monospace, Menlo, Monaco, 'Cascadia Mono', 'Segoe UI Mono',
-    'Roboto Mono', 'Oxygen Mono', 'Ubuntu Monospace', 'Source Code Pro',
-    'Fira Mono', 'Droid Sans Mono', 'Courier New', monospace;
+  --font-mono: ui-monospace, Menlo, Monaco, "Cascadia Mono", "Segoe UI Mono", "Roboto Mono", "Oxygen Mono",
+    "Ubuntu Monospace", "Source Code Pro", "Fira Mono", "Droid Sans Mono", "Courier New", monospace;
   --mi-white: #ffffff;
   --mi-mi-white: #f0f2e6;
   --mi-dark-blue: #465e65;
@@ -29,6 +28,10 @@ abbr,
 address,
 area,
 div,
+img,
+input,
+p,
+mark,
 html,
 span {
   position: relative;
@@ -38,9 +41,9 @@ span {
   margin: 0;
   padding: 0;
   border: 0;
-  /* font-size: 100%; */
   font: inherit;
   vertical-align: baseline;
+  -webkit-user-drag: none;
   -webkit-user-select: none;
   user-select: none;
 }
@@ -62,7 +65,7 @@ blockquote::before,
 blockquote::after,
 q::before,
 q::after {
-  content: '';
+  content: "";
   content: none;
 }
 
@@ -71,13 +74,17 @@ table {
   border-spacing: 0;
 }
 
-input[type='button'],
+input:focus-visible {
+  outline: none;
+}
+
+input[type="button"],
 .cursor-pointer {
   cursor: pointer;
 }
 
 /** 输入框 */
-input[type='text'] {
+input[type="text"] {
   width: 200px;
   border-radius: 10px;
   background-color: #000;
@@ -92,7 +99,7 @@ input[type='text'] {
   }
 }
 
-input[type='radio'] {
+input[type="radio"] {
   width: 0;
   height: 0;
   overflow: hidden;
@@ -102,7 +109,7 @@ input[type='radio'] {
 
     &::before,
     &::after {
-      content: '';
+      content: "";
       position: absolute;
       border-radius: 50%;
       top: 50%;
@@ -154,6 +161,11 @@ input[type='radio'] {
   }
 }
 
+input[type="image"] {
+  -webkit-user-select: none;
+  user-select: none;
+}
+
 .center {
   position: absolute;
   left: 50%;
@@ -193,4 +205,24 @@ img {
   -webkit-line-clamp: 2;
   line-clamp: 2;
   -webkit-box-orient: vertical;
+}
+
+/*  彩色字 */
+.colorText {
+  color: transparent;
+  background-image: linear-gradient(45deg, #ff0, #0f0, #f00, #0ff, #00f, #f0f, #ff0);
+  background-position: 0% 0%;
+  background-size: 400% 100%;
+  background-clip: text;
+  animation: 6s linear 0s infinite colorText;
+}
+
+@keyframes colorText {
+  0% {
+    background-position: 400% 0%;
+  }
+
+  100% {
+    background-position: 0% 0%;
+  }
 }

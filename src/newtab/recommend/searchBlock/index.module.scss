@@ -1,0 +1,105 @@
+/** 下面的检索框 */
+.searchBlock {
+  width: calc(30 * 16px + 24px + 88px);
+  background-color: #333;
+  border-radius: 8px 12px 12px 8px;
+
+  input {
+    display: inline-block;
+    vertical-align: bottom;
+    height: 44px;
+  }
+
+  input[type="image"] {
+    width: 42px;
+    border-radius: 6px;
+    padding: 12px 10px;
+  }
+
+  input[type="text"] {
+    vertical-align: text-top;
+    padding: 0px 30px 0px 10px;
+    width: calc(30 * 16px);
+    line-height: 32px;
+    font-size: 16px;
+    // border-left: 1px solid #9ff;
+    // border-right: 1px solid #9ff;
+  }
+
+  input[type="button"] {
+    width: 56px;
+    background-color: transparent;
+    line-height: 20px;
+    padding: 6px 0px;
+    margin-left: 6px;
+    color: #0ff;
+    background-image: linear-gradient(to top left, #f00 30%, #0ff, #ff0 60%);
+    background-clip: text;
+  }
+
+  // 清理的 x 号
+  span {
+    position: absolute;
+    z-index: 2;
+    left: 496px;
+    top: 8px;
+    transform: rotate(45deg);
+    color: #999;
+    width: 28px;
+    height: 24px;
+    font-size: 24px;
+    font-weight: 300;
+    line-height: 26px;
+    text-align: center;
+    border-radius: 50%;
+    cursor: w-resize;
+  }
+}
+
+// 选择检索引擎
+.selectEngine {
+  position: absolute;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-items: center;
+  background-color: #fff;
+  box-shadow: 1px 1px 12px #f306;
+  border-radius: 8px;
+  // 每一个块
+  & > div {
+    height: 33px;
+    line-height: 33px;
+    margin: 3px 12px;
+    border-radius: 8px;
+
+    &:hover {
+      background-image: linear-gradient(to right, #eee, #efe 40%, #efe 60%, #eee);
+    }
+
+    // 图或文本
+    & > div {
+      display: inline-block;
+      vertical-align: top;
+
+      &:nth-child(1) {
+        width: 24px;
+      }
+      &:nth-child(3) {
+        width: 78px;
+        height: 29px;
+        line-height: 29px;
+      }
+
+      img {
+        padding-top: 5px;
+        width: 24px;
+        height: 29px;
+      }
+
+      padding: 0px 4px;
+      color: #000;
+    }
+  }
+}

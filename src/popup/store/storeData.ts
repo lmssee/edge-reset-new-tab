@@ -7,6 +7,8 @@
  * @Description 数据池公用数据
  ****************************************************************************/
 
+import { NewTabValueType } from 'src/common/types';
+
 /** useSelector 使用 state 数据类型 */
 export type StoreState = {
   /** 当前标签页信息 */
@@ -17,7 +19,7 @@ export type StoreState = {
      *  -  `recommend`  推荐项
      *  -  `custom`     自定义项
      */
-    selected: string;
+    selected: NewTabValueType;
     /** 自定项被选择时的值 */
     custom: string;
   };

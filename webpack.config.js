@@ -59,15 +59,15 @@ export default function ({ dev }) {
       },
       // 配置 scss
       {
-        test: /\.scss$/,
+        test: /\.s?css$/,
         // 加载是至下而上，也就是说 webpack 使用数组是 pop
         use: [
           'style-loader',
           {
             loader: 'css-loader',
-            options: {
-              modules: true,
-            },
+            // options: {
+            //   modules: true,
+            // },
           },
           'postcss-loader',
           'sass-loader',

@@ -30,8 +30,10 @@ for (const key of ['html', 'body']) {
     e => {
       e.stopPropagation();
       e.preventDefault();
+      window.location.reload();
       return false;
     },
+    { capture: false },
   );
 }
 /// 为了能够复用，在抓到根元素后才赋值
@@ -57,9 +59,3 @@ createRoot(root).render(
     </Provider>
   </StrictMode>,
 );
-
-document.body.addEventListener('contextmenu', e => {
-  console.log('====================================');
-  console.log(e);
-  console.log('====================================');
-});

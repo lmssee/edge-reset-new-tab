@@ -13,6 +13,7 @@ import { CSStorage } from 'src/common';
 import { setTabSelected } from './store/tabSlice';
 import styles from './popup.module.scss';
 import { getLocaleText } from 'src/common/getLocaleText';
+import { NewTabValueType } from 'src/common/types';
 
 /** 下部的单选框
  *
@@ -42,7 +43,7 @@ export function RadioBlock() {
   }
 
   /** 改变当前的值 */
-  function changeState(str: string) {
+  function changeState(str: NewTabValueType) {
     if (OldValue !== str) {
       CSStorage.get(['newTab'], response => {
         CSStorage.set({
@@ -101,7 +102,7 @@ export function RadioBlock() {
           />
           <label
             htmlFor={'radio' + ele.value}
-            onClick={() => changeState(ele.value)}
+            onClick={() => changeState(ele.value as NewTabValueType)}
           >
             {ele.text}
           </label>

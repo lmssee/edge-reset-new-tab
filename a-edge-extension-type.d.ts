@@ -1,8 +1,8 @@
 /****************************************************************************
 * @Author lmssee
 * @Email lmssee@outlook.com
-* @FileName a-edge-extends-types.d.ts
-* @CreateDate  周六  9/12/2024 18:43:43
+* @FileName a-edge-extension-type.d.ts
+* @CreateDate  周日  9/13/2024 16:22:39
 * @Description 显式向项目添加 ‘chrome’ 的类型
 *
 * *请注意以下两几点：*

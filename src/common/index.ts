@@ -16,5 +16,5 @@ export { CRuntime } from './chromeRuntime';
 export function CLChanged(
   callback: (changes: CmStorageChanged, areaName: string) => void,
 ) {
-  chrome.storage.onChanged.addListener(callback as () => void);
+  chrome.storage.onChanged.addListener(callback);
 }

@@ -9,7 +9,7 @@
 
 import React, { useLayoutEffect, useState } from 'react';
 import styles from './blank.module.scss';
-import { getLocaleText } from 'src/common/getLocaleText';
+import { getTime } from '../tools';
 
 export function BlankPage() {
   const [timeShow, setTimeShow] = useState({
@@ -17,29 +17,16 @@ export function BlankPage() {
     day: '',
   });
 
-  function getTime() {
-    const now = new Date();
-    setTimeShow({
-      time: now.toLocaleString(),
-      day: getLocaleText(
-        [
-          'sunday',
-          'monday',
-          'tuesday',
-          'wednesday',
-          'thursday',
-          'friday',
-          'saturday',
-        ][now.getDay()],
-      ),
-    });
+  /** 设定时间 */
+  function setTime() {
+    setTimeShow(getTime());
   }
 
   useLayoutEffect(() => {
-    if (timeShow.time === '') getTime();
+    if (timeShow.time === '') setTime();
 
     const timeId = setInterval(() => {
-      getTime();
+      setTime();
     }, 1000);
 
     return () => {

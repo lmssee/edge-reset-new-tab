@@ -9,6 +9,7 @@
 
 import { createSlice } from '@reduxjs/toolkit';
 import { storeSyncList } from './storeData';
+import { NewTabValueType } from 'src/common/types';
 
 /** 初始化数据 */
 const initialState: {
@@ -18,7 +19,7 @@ const initialState: {
    *  -  `recommend`  推荐项
    *  -  `custom`     自定义项
    */
-  selected: string;
+  selected: NewTabValueType;
   /** 自定项被选择时的值 */
   custom: string;
 } = {
@@ -48,7 +49,7 @@ export const tabSlice = createSlice({
         const payload = (
           action as {
             payload: {
-              selected: string;
+              selected: NewTabValueType;
               url: string;
             };
           }
