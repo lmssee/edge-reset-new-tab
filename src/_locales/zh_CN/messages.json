@@ -51,9 +51,37 @@
     "description": "新标签页的检索输入框的 placeholder 文本",
     "message": "输入点啥"
   },
+  "parsing_text": {
+    "description": "正在解析",
+    "message": "正在解析"
+  },
+  "parsed_done_text": {
+    "description": "解析完毕",
+    "message": "解析完毕"
+  },
+  "ready_to_jump_text": {
+    "description": "准备跳转",
+    "message": "准备跳转"
+  },
+  "search_target_self": {
+    "description": "跳转方式",
+    "message": "本页"
+  },
+  "search_target_blank": {
+    "description": "跳转方式",
+    "message": "新页"
+  },
   "search_text": {
     "description": "搜索（文本-用在按钮处）",
     "message": "搜索"
+  },
+  "setting_text": {
+    "description": "设置（文本-用在按钮处）",
+    "message": "设置"
+  },
+  "search_engine_text": {
+    "description": "搜索方式（文本）",
+    "message": "搜索引擎："
   },
   "popup_h1": {
     "description": "弹窗标题",

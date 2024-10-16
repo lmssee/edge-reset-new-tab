@@ -12,12 +12,13 @@ import bing from './bing.png';
 import google from './google.png';
 import sogou from './sogou.png';
 import yandex from './yandex.png';
+import { SearchEngine } from 'src/common/types';
 
 /**
  * 导出相应的图标信息
  *
  */
-export const searchLogo: { [x: string]: string } = {
+export const searchLogo: { [x in SearchEngine]: string } = {
   /** 百度 */
   baidu,
   /** bing */

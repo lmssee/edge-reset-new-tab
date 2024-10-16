@@ -7,7 +7,7 @@
  * @Description 按钮组
  ****************************************************************************/
 
-import React, { useEffect, useLayoutEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { CSStorage } from 'src/common';
 import { setTabSelected } from './store/tabSlice';
@@ -59,7 +59,7 @@ export function RadioBlock() {
   }
 
   /** 初始化数据 */
-  useLayoutEffect(() => {
+  useEffect(() => {
     setDataList([
       {
         text: getLocaleText('blank_page'),

@@ -18,15 +18,17 @@ const chromeStorageSync = chrome.storage.sync;
  * - set 设置新值到云端
  */
 export const CSStorage = {
-  /** 所有的间集合，非本数组的键是真的贱
-   * ```ts
-   *  const keyList:string[] = [
-   *      'contextMenus',
-   *    ];
-   * ```
-   */
-  keyList: ['contextMenus'],
   /**  获取云端储存的值
+   *
+   * ```ts
+   * type SyncKeyList =
+   *  | "contextMenu"
+   *  | "newTab"
+   *  | "urlList"
+   *  | "urlLastKey"
+   *  | "search"
+   * ```
+   *
    *  @param {array} attributeList 字符串数组
    * @param {function} call  Back 回调函数
    */
@@ -41,8 +43,11 @@ export const CSStorage = {
    *  ```ts
    *
    *  type CmStorageSyncValueT = {
-   *    contextMenu?: contextMenuValueT;
-   *     newTab?: newTabValueT;
+   *    contextMenu?: ContextMenuValue;
+   *    newTab?: NewTabValue;
+   *    search?: SearchSync;
+   *    urlList?: URLList;
+   *    urlLastKey?: URLLastKey;
    *  };
    *
    * ```
@@ -54,7 +59,13 @@ export const CSStorage = {
       (chromeStorageSync.set(data, callback), true)) ||
       chromeStorageSync.set(data);
   },
-  /** 移除云端数据 */
+  /** 移除云端数据
+   *
+   * ```ts
+   * type SyncKeyList = "contextMenu" | "newTab" | "urlList" | "urlLastKey" | "search"
+   * ```
+   *
+   */
   remove(keys: SyncKeyList[], callback = undefined) {
     (typeof callback === 'function' &&
       (chromeStorageSync.remove(keys, callback), true)) ||

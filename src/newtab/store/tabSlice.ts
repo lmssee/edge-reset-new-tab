@@ -34,8 +34,12 @@ export const tabSlice = createSlice({
   name: 'tab',
   initialState,
   reducers: {
-    changeSelect: (state, action) => (state.selected = action.payload),
-    changeCustom: (state, action) => (state.custom = action.payload),
+    changeSelect: (state, action) => {
+      state.selected = action.payload;
+    },
+    changeCustom: (state, action) => {
+      state.custom = action.payload;
+    },
   },
   extraReducers: builder => {
     builder.addCase(

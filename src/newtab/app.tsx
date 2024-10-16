@@ -1,36 +1,26 @@
 import React, { useEffect } from 'react';
 import '../css/common.scss';
 import { CLChanged } from 'src/common';
-import { BlankPage } from './blankPage';
-import { useSelector } from 'react-redux';
-import { StoreState, storeSyncList } from './store/storeData';
+// import { useSelector } from 'react-redux';
+// import { StoreState, storeSyncList } from './store/storeData';
 import { useDispatch } from 'react-redux';
 import { CSStorage } from 'src/common/chromeSStorage';
-import { Loading } from './loading';
-import { Recommend } from './recommend';
 import { NewTabValue } from 'src/common/types';
+import { Outlet, useLocation, useNavigate } from 'react-router-dom';
+import { storeSyncList } from './store/storeData';
 
 /** 根元素 */
 export function App() {
-  /**
-   * 当前选择的项
-   *
-   * - blank 空白项
-   * - recommend 推荐项
-   * - custom 自定义项
-   */
-  const pageState = useSelector((state: StoreState) => state.tab.selected) as
-    | 'blank'
-    | 'recommend'
-    | 'custom';
-
-  /** 自定义的网址 */
-  const url = useSelector((state: StoreState) => state.tab.custom);
-
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const location = useLocation();
 
-  /** 设置新的值，发生在初始化或当前页面展示时接收到变化值 */
-  function setValue(value: NewTabValue) {
+  /** 设置新的值且切换路由，发生在初始化或当前页面展示时接收到变化值 */
+  function routerChange(value: NewTabValue) {
+    {
+      /* {(url !== '' && pageState === 'custom' && <Loading />) ||
+        (pageState === 'recommend' && <Recommend />) || <BlankPage />} */
+    }
     const selected = value.type;
     const url = value.url;
     /// 设定新的值
@@ -38,9 +28,20 @@ export function App() {
       type: storeSyncList.init_new_tab_info,
       payload: { selected, url },
     });
+
     /// 转向设定的网址
-    if (selected === 'custom' && url) window.location.replace(url);
+    if (selected === 'custom' && url)
+      navigate(`loading/${encodeURIComponent(url)}`);
+    else if (selected === 'blank') navigate('/');
+    else navigate('recommend');
   }
+
+  // const a = 'car';
+  // const b = 'cat';
+  // a.slice(
+  //   0,
+  //   a.split('').findIndex((value, index) => b[index] !== value),
+  // );
 
   /** ico 配置 */
   useEffect(() => {
@@ -51,23 +52,20 @@ export function App() {
   }, []);
 
   useEffect(() => {
+    /// 非空进入即为目的的进入页面，不干涉路由的正常跳转
+    if (location.pathname !== '/') return;
     /** 获取云端储存数据 */
     CSStorage.get(['newTab'], response => {
-      setValue(response.newTab || {});
+      routerChange(response.newTab || {});
     });
     /** 在这里监听储存数据的变化 */
     CLChanged((pref, areaName: string) => {
       const newtab = pref.newTab;
       /// 仅关心有效云端数据的改变
       if (areaName !== 'sync' || !newtab) return;
-      setValue(newtab.newValue);
+      routerChange(newtab.newValue);
     });
   }, []);
 
-  return (
-    <>
-      {(url !== '' && pageState === 'custom' && <Loading />) ||
-        (pageState === 'recommend' && <Recommend />) || <BlankPage />}
-    </>
-  );
+  return <Outlet></Outlet>;
 }

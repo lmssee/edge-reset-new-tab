@@ -7,7 +7,7 @@
  * @Description 空白页面，用于用户设定
  ****************************************************************************/
 
-import React, { useLayoutEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './blank.module.scss';
 import { getTime } from '../tools';
 
@@ -22,7 +22,7 @@ export function BlankPage() {
     setTimeShow(getTime());
   }
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     if (timeShow.time === '') setTime();
 
     const timeId = setInterval(() => {

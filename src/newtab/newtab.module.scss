@@ -12,13 +12,20 @@ html {
 //  加载中显示样式
 .loading {
   width: auto;
-  height: 2rem;
   line-height: 100%;
-  font-size: 28px;
   font-weight: 800;
   position: fixed;
   z-index: 2;
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
+
+  div {
+    line-height: 22px;
+    padding: 5px;
+
+    &:first-child {
+      font-size: 22px;
+    }
+  }
 }

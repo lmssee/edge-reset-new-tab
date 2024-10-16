@@ -44,6 +44,7 @@ span {
   font: inherit;
   vertical-align: baseline;
   -webkit-user-drag: none;
+  // user-drag: none;
   -webkit-user-select: none;
   user-select: none;
 }
@@ -215,6 +216,10 @@ img {
   background-size: 400% 100%;
   background-clip: text;
   animation: 6s linear 0s infinite colorText;
+}
+
+.redB {
+  background-color: #f12;
 }
 
 @keyframes colorText {

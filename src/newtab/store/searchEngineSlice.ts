@@ -14,6 +14,7 @@ import { SearchEngine, SearchSync } from 'src/common/types';
 /** 初始化数据 */
 const initialState: SearchSync = {
   default: 'baidu',
+  target: '_self',
   list: ['baidu', 'bing', 'yandex', 'google', 'sogou', 360],
   engine: {
     baidu: {
@@ -58,33 +59,33 @@ export const searchEngineSlice = createSlice({
   initialState,
   reducers: {
     /** 设置默认的检索引擎 */
-    setSearchEngineDefault: (state, action) => (state.default = action.payload),
+    setSearchEngineDefault: (state, action) => {
+      state.default = action.payload;
+    },
     /** 设定默认的检索列表，有序 */
-    setSearchEngineList: (state, action) => (state.list = action.payload),
+    setSearchEngineList: (state, action) => {
+      state.list = action.payload;
+    },
   },
   extraReducers: builder => {
     /** 添加异步设置当前的选择项 */
     builder.addCase(
-      storeSyncList.set_search_engine_default,
+      storeSyncList.set_search_engine,
       (state, action: unknown) => {
         const payload = (
           action as {
-            payload: SearchEngine;
+            payload: {
+              default?: SearchEngine;
+              list?: SearchEngine[];
+              target: '_blank' | '_self';
+            };
           }
         ).payload;
-        if (payload) state.default = payload;
-      },
-    );
-    /** 添加异步设置当前的选择列表 */
-    builder.addCase(
-      storeSyncList.set_search_engine_list,
-      (state, action: unknown) => {
-        const payload = (
-          action as {
-            payload: SearchEngine[];
-          }
-        ).payload;
-        if (payload) state.list = payload;
+        if (payload) {
+          if (payload.default) state.default = payload.default;
+          if (payload.list) state.list = payload.list;
+          if (payload.target) state.target = payload.target;
+        }
       },
     );
   },

@@ -23,7 +23,30 @@ export type StoreState = {
     /** 自定项被选择时的值 */
     custom: string;
   };
+  /**
+   *  储存在本地的检索信息数据
+   *
+   * ```ts
+   *   type SearchSync = {
+   *    default: SearchEngine;
+   *    list: SearchEngine[];
+   *    engine: { [x in SearchEngine]: {
+   *        value: SearchEngine;
+   *        text: string;
+   *        start: string;
+   *        end?: string;
+   *    };
+   *  };
+   *}
+   * ```
+   */
   searchEngine: SearchSync;
+  /**
+   * 设置页面显隐
+   */
+  setting: {
+    show: boolean;
+  };
 };
 /** store 异步想关参数列  */
 export const storeSyncList = {
@@ -50,23 +73,14 @@ export const storeSyncList = {
    * ```ts
    *      dispatch({
    *        type: storeSyncList.set_search_engine_default,
-   *        payload: SearchEngine ,
+   *        payload: {
+   *            default?: SearchEngine,
+   *            list?: SearchEngine[],
+   *            target?: '_blank' | '_self'
+   *        },
    *   });
    * ```
    *
    */
-  set_search_engine_default: 'SET_SEARCH_ENGINE_DEFAULT',
-  /**
-   * ## SET_SEARCH_ENGINE_LIST
-   *
-   * 设置检索引擎的当前列表（有序）
-   * 使用方法：
-   * ```ts
-   *      dispatch({
-   *       type: storeSyncList.set_search_engine_list,
-   *       payload:  SearchEngine[],
-   *   });
-   * ```
-   */
-  set_search_engine_list: 'SET_SEARCH_ENGINE_LIST',
+  set_search_engine: 'SET_SEARCH_ENGINE',
 };

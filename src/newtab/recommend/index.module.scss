@@ -14,7 +14,7 @@
 // 上面的时间显示
 .time {
   font-size: larger;
-  margin: 1.8rem auto 3.9rem;
+  margin: 1.8rem auto 4.2rem;
 
   div {
     float: left;
@@ -23,13 +23,40 @@
       font-weight: 600;
       float: right;
       cursor: pointer;
-      padding-right: 16px;
-      animation-play-state: running;
+      overflow: hidden;
+
+      & > div {
+        width: 4rem;
+        text-align: center;
+        &:nth-child(2) {
+          display: none;
+          transform: rotate(0deg);
+          background-image: linear-gradient(to top, #f0f, #0ff);
+          color: transparent;
+          background-clip: text;
+        }
+      }
 
       &:hover {
-        animation-play-state: paused;
-        color: #0006;
+        & > div {
+          &:nth-child(1) {
+            display: none;
+          }
+          &:nth-child(2) {
+            display: unset;
+            animation: 2s linear 0s infinite settingImg;
+          }
+        }
       }
     }
+  }
+}
+
+@keyframes settingImg {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
   }
 }

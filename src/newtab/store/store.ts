@@ -19,6 +19,8 @@ import {
 } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import tabReducer from './tabSlice';
+import searchEngineReducer from './searchEngineSlice';
+import settingReducer from './settingSlice';
 
 /**  创建储存到本的的配置信息 */
 const persistConfig = {
@@ -27,7 +29,11 @@ const persistConfig = {
   whitelist: [],
 };
 
-const reducer = { tab: tabReducer };
+const reducer = {
+  tab: tabReducer,
+  searchEngine: searchEngineReducer,
+  setting: settingReducer,
+};
 
 /** 创建需要储存到本地的数据 */
 const rootReducer = persistReducer(

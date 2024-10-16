@@ -7,11 +7,14 @@
  * @Description 搜索框及搜索方式
  ****************************************************************************/
 
-import React, { useLayoutEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import styles from './index.module.scss';
 import { getLocaleText } from 'src/common/getLocaleText';
 import { SearchButton } from './searchButton';
-import { SearchEngine } from './searchEngine';
+import { SearchEngineEle } from './searchEngine';
+import { useSelector } from 'react-redux';
+import { StoreState } from 'src/newtab/store/storeData';
+import { useNavigate } from 'react-router-dom';
 
 export function SearchBlock() {
   /** 检索输入框的值 */
@@ -26,6 +29,28 @@ export function SearchBlock() {
   const inputRef = useRef<HTMLInputElement>(null);
   /** enter 键按下时的输入框的值 */
   const [isComposing, setIsComposing] = useState<boolean>(false);
+  /** 检索信息
+   * ```ts
+   * 储存在本地的检索信息数据
+   * ```ts
+   * type SearchSync = {
+   *  default: SearchEngine;
+   *  list: SearchEngine[];
+   *  engine: { [x in SearchEngine]: {
+   *      value: SearchEngine;
+   *      text: string;
+   *      start: string;
+   *      end?: string;
+   *    };
+   *  };
+   *}
+   * ```
+   *
+   *
+   */
+  const searchEngine = useSelector((state: StoreState) => state.searchEngine);
+
+  const navigate = useNavigate();
 
   /** input 元素聚焦 */
   function inputFocus() {
@@ -50,7 +75,7 @@ export function SearchBlock() {
   }
 
   /** 逐字恢复已删除的内容 */
-  useLayoutEffect(() => {
+  useEffect(() => {
     if (!recoverText) return;
     /** 两者的差值 */
     let str: string = LastText.slice(SearchText.length);
@@ -62,6 +87,7 @@ export function SearchBlock() {
         str = str.slice(1);
         setSearchText(result);
       } else {
+        clearInterval(timeId);
         stopResetSearchText(); /// 清理完毕后更改插值
         inputFocus();
       }
@@ -85,7 +111,7 @@ export function SearchBlock() {
   }
 
   /** 逐字清理已输入的内容 */
-  useLayoutEffect(() => {
+  useEffect(() => {
     if (!clearText) return;
     let str = SearchText;
     setLastText(SearchText);
@@ -94,6 +120,7 @@ export function SearchBlock() {
         str = str.slice(0, -1);
         setSearchText(str);
       } else {
+        clearInterval(timeId);
         stopClearSearchText(); /// 清理完毕后更改插值
         inputFocus();
       }
@@ -103,7 +130,7 @@ export function SearchBlock() {
   }, [clearText]);
 
   /** 给个小的定时延迟，保证能够捕获到输入框焦点 */
-  useLayoutEffect(() => {
+  useEffect(() => {
     const autoFocus = () => {
       inputFocus();
       document.removeEventListener('click', autoFocus);
@@ -113,7 +140,7 @@ export function SearchBlock() {
   }, []);
 
   /** 监视当前编辑器输入状态 */
-  useLayoutEffect(() => {
+  useEffect(() => {
     const _i = inputRef.current!;
 
     const handleCompositionStart = () => setIsComposing(true);
@@ -139,20 +166,28 @@ export function SearchBlock() {
   function gotoOther() {
     const str = SearchText.trim();
     if (str.length === 0) return;
-    /**
-     * - 360      https://www.so.com/s?q=123
-     * - 百度      https://www.baidu.com/s?wd=123
-     * - bing     https://cn.bing.com/search?q=123
-     * - 搜狗      https://www.sogou.com/web?query=123
-     * - google   https://www.google.com/search?q=123
-     * - yandex   https://yandex.com/search/?text=123
-     */
-    window.open(`https://www.baidu.com/s?wd=${str}&from=lmssee`, '_target');
+    searchEngine;
+    /** 当前检索信息 */
+    const search = searchEngine.engine[searchEngine.default];
+    /*** 目标网址 */
+    const url = search.start
+      .concat(str)
+      .concat('&from=lmssee')
+      .concat(search.end || '');
+    /** 使用 window 打开方式打开的网址 */
+    const _url = chrome.runtime
+      .getURL('newTab/index.html')
+      .concat('#/loading/')
+      .concat(encodeURIComponent(url));
+
+    if (searchEngine.target === '_self')
+      navigate(`/loading/${encodeURIComponent(url)}`, {});
+    else window.open(_url, '_target');
   }
 
   return (
     <div className={styles.searchBlock}>
-      <SearchEngine settingFocus={inputFocus} />
+      <SearchEngineEle settingFocus={inputFocus} />
       <input
         type="text"
         autoFocus={true}

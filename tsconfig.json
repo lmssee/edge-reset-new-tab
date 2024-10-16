@@ -2,7 +2,7 @@
   "compilerOptions": {
     "outDir": "./dist/",
     "module": "ESNext",
-    "target": "es5",
+    "target": "es2015",
     "jsx": "react",
     "allowJs": true,
     "moduleResolution": "Bundler",

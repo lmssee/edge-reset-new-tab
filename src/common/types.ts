@@ -59,14 +59,16 @@ export type SearchEngine =
  * - default 当前使用的检索引擎
  * - list    检索引擎列表
  * - engine  具体检索引擎的数据信息
+ * - target  新网址打开的方式
  */
 
 export type SearchSync = {
   default: SearchEngine;
+  target: '_blank' | '_self';
   list: SearchEngine[];
   engine: {
     [x in SearchEngine]: {
-      value: string | 360;
+      value: SearchEngine;
       text: string;
       start: string;
       end?: string;
