@@ -79,7 +79,7 @@ export function SearchEngineEle(props: {
     <>
       <input
         type="image"
-        src={searchLogo[searchEngine.default]}
+        src={searchLogo[searchEngine.current]}
         alt="16*16"
         ref={input}
         // onMouseEnter={showEngine}
@@ -106,7 +106,7 @@ export function SelectEngine(props: {
    * 储存在本地的检索信息数据
    * ```ts
    *    type SearchSync = {
-   *     default: SearchEngine;
+   *     current: SearchEngine;
    *     list: SearchEngine[];
    *     engine: { [x in SearchEngine]: {
    *         value: SearchEngine;
@@ -137,11 +137,11 @@ export function SelectEngine(props: {
     CSStorage.get(['search'], result => {
       const oldSearch = result['search'] || engineList;
       const list = [...new Set([data.value, ...oldSearch.list])];
-      const search = { ...oldSearch, list, default: data.value };
+      const search = { ...oldSearch, list, current: data.value };
       CSStorage.set({ search }, () => {
         dispatch({
           type: storeSyncList.set_search_engine,
-          payload: { default: data.value, list },
+          payload: { current: data.value, list },
         });
 
         setTimeId(
@@ -168,8 +168,8 @@ export function SelectEngine(props: {
 
   /// 当值改变时触发当前选择变化
   useEffect(() => {
-    checkEle(engineList.default); ///  让元素被选择
-  }, [engineList.default]);
+    checkEle(engineList.current); ///  让元素被选择
+  }, [engineList.current]);
 
   return (
     <div
@@ -185,7 +185,7 @@ export function SelectEngine(props: {
               <input
                 type="radio"
                 name="selectSearchEngine"
-                defaultChecked={e.value === engineList.default}
+                defaultChecked={e.value === engineList.current}
                 id={'searchEngine' + e.value}
               />
               <label htmlFor={'searchEngine' + e.value}></label>

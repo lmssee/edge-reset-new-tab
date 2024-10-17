@@ -7,12 +7,13 @@
  * @Description 页脚的超链
  ****************************************************************************/
 
-import React from 'react';
+import React, { useState } from 'react';
 
 import styles from './index.module.scss';
 
 import { svgImage } from './images/export_svg';
 import { getLocaleText } from 'src/common/getLocaleText';
+import { createPortal } from 'react-dom';
 
 /**
  * 页脚的超链展示
@@ -40,18 +41,47 @@ export function Footer(): React.JSX.Element {
       href: 'https://github.com/lmssee/edge-reset-new-tab/issues/new',
     },
   ];
+  /** 当前设置的 title */
+  const [currentTitle, setCurrentTitle] = useState('');
+  /** 设置的 title 的位置信息 */
+  const [position, setPosition] = useState({
+    top: '',
+    left: '',
+  });
+  /** 展示 title  */
+  const showTitle = (e: React.MouseEvent) => {
+    const target = e.currentTarget as HTMLElement;
+    setCurrentTitle(target.dataset.title!);
+    const tarPosition = target.getBoundingClientRect();
+    setPosition({
+      top: tarPosition.top - tarPosition.height + 'px',
+      left: tarPosition.left + 'px',
+    });
+  };
 
   return (
     <div className={styles.index}>
       <ul>
         {dataList.map(ele => (
-          <li title={ele.title} key={ele.title}>
+          <li
+            key={ele.title}
+            data-title={ele.title}
+            onMouseEnter={showTitle}
+            onMouseLeave={() => setCurrentTitle('')}
+          >
             <a href={ele.href} target="_blank" rel="noopener noreferrer">
               <img src={ele.src} alt={ele.title} />
             </a>
           </li>
         ))}
       </ul>
+      {currentTitle !== '' &&
+        createPortal(
+          <div className={`  ${styles.title}`} style={position}>
+            {currentTitle}
+          </div>,
+          document.body,
+        )}
     </div>
   );
 }

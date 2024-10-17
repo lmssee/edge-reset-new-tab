@@ -83,6 +83,10 @@
     "description": "搜索方式（文本）",
     "message": "搜尋引擎："
   },
+  "search_result_open_target_text": {
+    "description": "检索打开方式（文本）",
+    "message": "搜索打開方式："
+  },
   "popup_h1": {
     "description": "弹窗标题",
     "message": "重置新标签页"

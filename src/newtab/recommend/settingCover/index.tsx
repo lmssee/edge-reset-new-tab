@@ -10,11 +10,10 @@
 import React from 'react';
 import styles from './index.module.scss';
 import { createPortal } from 'react-dom';
-// import { useSelector } from 'react-redux';
-// import { StoreState } from 'src/newtab/store/storeData';
 import { useDispatch } from 'react-redux';
 import { setSettingCover } from 'src/newtab/store/settingSlice';
 import { SearchSetting } from './searchSetting';
+import { Footer } from 'src/popup/footer';
 
 /** 设置页面的展示 */
 export function SettingCover() {
@@ -38,6 +37,7 @@ export function SettingCover() {
           +
         </div>
         <SearchSetting />
+        <Footer />
       </div>
     </div>,
     document.body,

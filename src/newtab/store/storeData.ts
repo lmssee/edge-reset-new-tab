@@ -74,7 +74,7 @@ export const storeSyncList = {
    *      dispatch({
    *        type: storeSyncList.set_search_engine_default,
    *        payload: {
-   *            default?: SearchEngine,
+   *            current?: SearchEngine,
    *            list?: SearchEngine[],
    *            target?: '_blank' | '_self'
    *        },

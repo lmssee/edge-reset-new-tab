@@ -168,7 +168,7 @@ export function SearchBlock() {
     if (str.length === 0) return;
     searchEngine;
     /** 当前检索信息 */
-    const search = searchEngine.engine[searchEngine.default];
+    const search = searchEngine.engine[searchEngine.current];
     /*** 目标网址 */
     const url = search.start
       .concat(str)

@@ -13,9 +13,9 @@ import { SearchEngine, SearchSync } from 'src/common/types';
 
 /** 初始化数据 */
 const initialState: SearchSync = {
-  default: 'baidu',
+  current: 'baidu',
   target: '_self',
-  list: ['baidu', 'bing', 'yandex', 'google', 'sogou', 360],
+  list: ['bing', 'baidu', 'google', 'yandex', 'sogou', 360],
   engine: {
     baidu: {
       value: 'baidu',
@@ -60,7 +60,7 @@ export const searchEngineSlice = createSlice({
   reducers: {
     /** 设置默认的检索引擎 */
     setSearchEngineDefault: (state, action) => {
-      state.default = action.payload;
+      state.current = action.payload;
     },
     /** 设定默认的检索列表，有序 */
     setSearchEngineList: (state, action) => {
@@ -75,14 +75,14 @@ export const searchEngineSlice = createSlice({
         const payload = (
           action as {
             payload: {
-              default?: SearchEngine;
+              current?: SearchEngine;
               list?: SearchEngine[];
               target: '_blank' | '_self';
             };
           }
         ).payload;
         if (payload) {
-          if (payload.default) state.default = payload.default;
+          if (payload.current) state.current = payload.current;
           if (payload.list) state.list = payload.list;
           if (payload.target) state.target = payload.target;
         }

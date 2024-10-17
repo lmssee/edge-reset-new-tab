@@ -65,11 +65,11 @@
   },
   "search_target_self": {
     "description": "跳转方式",
-    "message": "self"
+    "message": "this page"
   },
   "search_target_blank": {
     "description": "跳转方式",
-    "message": "blank"
+    "message": "new page"
   },
   "search_text": {
     "description": "搜索（文本-用在按钮处）",
@@ -82,6 +82,10 @@
   "search_engine_text": {
     "description": "搜索方式（文本）",
     "message": "search engine:"
+  },
+  "search_result_open_target_text": {
+    "description": "检索打开方式（文本）",
+    "message": "search result open target:"
   },
   "popup_h1": {
     "description": "弹窗标题",

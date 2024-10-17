@@ -50,3 +50,28 @@
     }
   }
 }
+
+.title {
+  position: fixed;
+  width: auto;
+  max-width: 120px;
+  word-break: keep-all;
+  white-space: nowrap;
+  transform: translate(-50%, -80%);
+  background-color: #fff;
+  border-radius: 6px;
+  padding: 10px;
+  border: #f06 1px dashed;
+  z-index: 86;
+  &::after {
+    position: absolute;
+    top: calc(100% + 1px);
+    left: 50%;
+    content: "";
+    width: 0px;
+    height: 0px;
+    border-top: 4px solid #f06;
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+  }
+}

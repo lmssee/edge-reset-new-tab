@@ -42,10 +42,11 @@ export function Recommend() {
       /** 所有数据，以本地储存信息为蓝本，若版本一致，则云端替代本地，否则执行其他更改 */
       /*** 有值则在这里初始化本地数据并且比对版本内容的变化 */
       const search = result['search'];
-
+      const { current, list, target } = search;
+      /// 采用云端覆盖本地的方式
       dispatch({
         type: storeSyncList.set_search_engine,
-        payload: { default: search.default, list: search.list },
+        payload: { current, list, target },
       });
     });
   }, []);
